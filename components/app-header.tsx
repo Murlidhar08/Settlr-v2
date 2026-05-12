@@ -1,34 +1,13 @@
 "use client";
-
-import { t } from "@/lib/languages/i18n";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Header } from "./header";
-import { useUserConfig } from "./providers/user-config-provider";
 
-const ROUTE_TITLE_MAP: Record<string, string> = {
-    "/dashboard": "dashboard.title",
-    "/settings": "settings.title",
-    "/profile": "settings.title",
-    "/admin": "admin.title",
-};
-
-export function AppHeader({ initialSession }: { initialSession?: any }) {
-    const pathname = usePathname();
-    const { language } = useUserConfig();
+export function AppHeader(props: { title: string }) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
-
-    // Find the exact match or the parent match
-    const translationKey = ROUTE_TITLE_MAP[pathname];
-    const isTopLevelRoute = !!translationKey;
-
-    // Only show header (or its skeleton) if it's a designated top-level route
-    if (!isTopLevelRoute)
-        return null;
 
     if (!mounted) {
         return (
@@ -46,7 +25,7 @@ export function AppHeader({ initialSession }: { initialSession?: any }) {
     }
 
     return (
-        <Header title={t(translationKey, language)} initialSession={initialSession} />
+        <Header title={props.title} />
     );
 }
 

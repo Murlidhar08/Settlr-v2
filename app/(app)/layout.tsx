@@ -7,7 +7,6 @@ import { getUserSession } from "@/lib/auth/auth";
 import { isSetupRequired } from "@/lib/setup";
 
 // Components
-import { AppHeader } from "@/components/app-header";
 import { ImpersonationIndicator } from "@/components/auth/impersonation-indicator";
 import { LayoutTransitions } from "@/components/layout-transitions";
 import { UserConfigProvider } from "@/components/providers/user-config-provider";
@@ -39,7 +38,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           {/* Main Content */}
           <div className="flex-1 flex flex-col min-w-0 h-full">
-            <AppHeader initialSession={session} />
             <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
               <LayoutTransitions>
                 {children}

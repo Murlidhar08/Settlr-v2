@@ -1,8 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, TargetAndTransition } from "framer-motion";
-import { useTheme } from "next-themes";
-import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const MESSAGES = [
@@ -33,47 +31,21 @@ const ANIMATION_VARIANTS = [
 
 export function LoadingScreen() {
     const [message, setMessage] = useState("");
-    const [variant, setVariant] = useState<typeof ANIMATION_VARIANTS[number]>("float");
-    const { resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
         setMessage(MESSAGES[Math.floor(Math.random() * MESSAGES.length)]);
-        setVariant(ANIMATION_VARIANTS[Math.floor(Math.random() * ANIMATION_VARIANTS.length)]);
+
+        // Rotate messages every 3 seconds
+        const interval = setInterval(() => {
+            setMessage(MESSAGES[Math.floor(Math.random() * MESSAGES.length)]);
+        }, 3000);
+
+        return () => clearInterval(interval);
     }, []);
 
     if (!mounted) return null;
-
-    const isDark = resolvedTheme === "dark";
-    const logoSrc = isDark ? "/images/logo/dark_logo.svg" : "/images/logo/light_logo.svg";
-
-    const getLogoAnimation = (): TargetAndTransition => {
-        switch (variant) {
-            case "bounce":
-                return {
-                    y: [0, -20, 0],
-                    transition: { duration: 0.6, repeat: Infinity, ease: "easeInOut" }
-                };
-            case "pulse":
-                return {
-                    scale: [1, 1.1, 1],
-                    transition: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                };
-            case "spin-slow":
-                return {
-                    rotateY: [0, 180, 360],
-                    transition: { duration: 4, repeat: Infinity, ease: "linear" }
-                };
-            case "float":
-            default:
-                return {
-                    y: [0, -10, 0],
-                    x: [0, 5, 0, -5, 0],
-                    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                };
-        }
-    };
 
     return (
         <div className="h-full w-full flex flex-col items-center justify-center bg-background overflow-hidden">
@@ -86,7 +58,7 @@ export function LoadingScreen() {
                         y: [0, 30, 0],
                     }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]"
+                    className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]"
                 />
                 <motion.div
                     animate={{
@@ -95,82 +67,111 @@ export function LoadingScreen() {
                         y: [0, 50, 0],
                     }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]"
+                    className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[100px]"
                 />
             </div>
 
             <div className="relative flex flex-col items-center max-w-xs w-full px-6">
-                {/* Logo Container */}
-                <motion.div
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.5, type: "spring" }}
-                    className="relative mb-12"
-                >
-                    <motion.div animate={getLogoAnimation()} className="relative z-10">
-                        <Image
-                            src={logoSrc}
-                            alt="Logo"
-                            width={120}
-                            height={120}
-                            loading="eager"
-                            priority
-                            className="h-24 w-24 md:h-32 md:w-32 drop-shadow-2xl"
-                        />
-                    </motion.div>
+                {/* Premium Spinner */}
+                <div className="relative w-24 h-24 mb-16 flex items-center justify-center">
+                    {/* Outer slow ring */}
+                    <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 rounded-full border-2 border-primary/10 border-t-primary/40 border-l-primary/40"
+                    />
 
-                    {/* Aesthetic rings */}
+                    {/* Middle reverse ring */}
                     <motion.div
-                        animate={{ scale: [1, 1.4], opacity: [0.3, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-                        className="absolute inset-0 rounded-full border-2 border-primary/30"
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-2 rounded-full border-2 border-dashed border-primary/20"
                     />
+
+                    {/* Inner fast ring */}
                     <motion.div
-                        animate={{ scale: [1, 1.8], opacity: [0.2, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
-                        className="absolute inset-0 rounded-full border border-primary/20"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-4 rounded-full border-t-2 border-primary shadow-[0_0_15px_rgba(var(--primary),0.5)]"
                     />
-                </motion.div>
+
+                    {/* Center pulsing core */}
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_var(--primary)]"
+                    />
+
+                    {/* Orbiting particles */}
+                    {[0, 120, 240].map((angle, i) => (
+                        <motion.div
+                            key={i}
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
+                            className="absolute inset-[-12px]"
+                        >
+                            <motion.div
+                                animate={{ scale: [1, 1.5, 1] }}
+                                transition={{ duration: 1, repeat: Infinity }}
+                                className="w-1.5 h-1.5 bg-primary/40 rounded-full absolute top-0 left-1/2 -translate-x-1/2"
+                            />
+                        </motion.div>
+                    ))}
+                </div>
 
                 {/* Text Area */}
-                <div className="h-12 flex items-center justify-center mb-8 px-4">
+                <div className="h-12 flex items-center justify-center mb-8 px-4 w-64">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={message}
-                            initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
+                            initial={{ y: 10, opacity: 0, filter: "blur(5px)" }}
                             animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                            exit={{ y: -20, opacity: 0, filter: "blur(10px)" }}
-                            transition={{ duration: 0.6, ease: "circOut" }}
-                            className="text-center text-lg font-medium text-foreground tracking-tight bg-gradient-to-r from-foreground via-foreground/50 to-foreground bg-[length:200%_100%] animate-shimmer"
-                            style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+                            exit={{ y: -10, opacity: 0, filter: "blur(5px)" }}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            className="text-center text-sm font-black uppercase tracking-widest text-foreground/80"
                         >
                             {message}
                         </motion.p>
                     </AnimatePresence>
                 </div>
 
-                {/* Modern Loading Indicator */}
-                <div className="relative w-full h-1.5 bg-muted/30 rounded-full overflow-hidden backdrop-blur-sm">
+                {/* Modern Progress Track */}
+                <div className="relative w-full h-1 bg-muted/20 rounded-full overflow-hidden backdrop-blur-sm">
                     <motion.div
                         initial={{ left: "-100%" }}
                         animate={{ left: "100%" }}
                         transition={{
-                            duration: 2,
+                            duration: 2.5,
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-primary to-transparent"
+                        className="absolute top-0 bottom-0 w-1/2 bg-linear-to-r from-transparent via-primary/50 to-transparent"
                     />
                 </div>
 
-                <motion.span
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}
-                    className="mt-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60 font-semibold"
+                    transition={{ delay: 0.5 }}
+                    className="mt-6 flex flex-col items-center gap-1.5"
                 >
-                    Initializing Secure Session
-                </motion.span>
+                    <span className="text-[10px] uppercase font-black tracking-[0.3em] text-primary/60">
+                        Initializing
+                    </span>
+                    <div className="flex gap-1">
+                        {[0, 1, 2].map((i) => (
+                            <motion.div
+                                key={i}
+                                animate={{ opacity: [0.2, 1, 0.2] }}
+                                transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                                className="w-1 h-1 rounded-full bg-primary"
+                            />
+                        ))}
+                    </div>
+                </motion.div>
             </div>
         </div>
     );

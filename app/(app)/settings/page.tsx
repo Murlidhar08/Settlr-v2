@@ -45,6 +45,7 @@ import { getInitials } from "@/utility/commonFunction";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
+import { AppHeader } from "@/components/app-header";
 import { useAppVersion } from "@/tanstacks/settings";
 
 export default function SettingsPage() {
@@ -123,6 +124,8 @@ export default function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-background pb-34">
+      <AppHeader title={t("settings.title", language)} />
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -388,6 +391,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 function SettingsSkeleton() {
   return (
     <div className="min-h-screen bg-background">
+      <AppHeader title={"..."} />
       <div className="mx-auto max-w-4xl pb-32 mt-6 space-y-8 px-6 animate-pulse">
         {/* Profile Card Skeleton */}
         <div className="h-28 w-full rounded-[2rem] bg-muted/10 border border-border/50 p-6 flex items-center gap-4">
