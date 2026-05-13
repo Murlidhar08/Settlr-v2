@@ -1,11 +1,9 @@
 import { AppHeader } from "@/components/app-header";
-import MobileNav from "@/components/navbar/mobile-nav";
 import { getUserSession } from "@/lib/auth/auth";
 import { t } from "@/lib/languages/i18n";
 import { getUserConfig } from "@/lib/user-config";
 
 // Components
-
 export default async function Page() {
   const session = await getUserSession();
   const { language, currency } = await getUserConfig();
@@ -28,8 +26,6 @@ export default async function Page() {
         <p>{session?.user.email}</p>
 
       </div>
-
-      <MobileNav />
     </>
   );
 }

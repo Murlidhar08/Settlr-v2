@@ -1,10 +1,9 @@
 "use client"
 
-import { envClient } from "@/lib/env.client"
 import { motion } from "framer-motion"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { Menu } from "lucide-react"
 import ProfileAvatar from "./auth/profile-avatar"
+import { useNav } from "./providers/nav-provider"
 
 interface HeaderProps {
   title: string
@@ -13,7 +12,7 @@ interface HeaderProps {
 }
 
 const Header = ({ title, isProfile, leftAction }: HeaderProps) => {
-  const router = useRouter()
+  const { toggleMenu } = useNav()
   const showProfile = isProfile ?? true
 
   return (
@@ -23,6 +22,8 @@ const Header = ({ title, isProfile, leftAction }: HeaderProps) => {
       className="sticky top-0 z-40 flex items-center justify-between bg-background/80 dark:bg-background/60 backdrop-blur-xl px-6 py-4 border-b border-border/90 shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.9)]"
     >
       <div className="flex items-center gap-4">
+        <Menu className="cursor-pointer lg:hidden" onClick={toggleMenu} />
+
         {leftAction ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -34,25 +35,6 @@ const Header = ({ title, isProfile, leftAction }: HeaderProps) => {
           </motion.div>
         ) : (
           <div className="flex items-center gap-4">
-            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center lg:hidden group overflow-hidden relative" onClick={() => router.push("/")}>
-              <Image
-                src="/images/logo/light_logo.svg"
-                alt={envClient.NEXT_PUBLIC_APP_NAME}
-                loading="eager"
-                width={36}
-                height={36}
-                className="relative z-10 dark:hidden group-hover:rotate-12 transition-transform duration-500"
-              />
-              <Image
-                src="/images/logo/dark_logo.svg"
-                alt={envClient.NEXT_PUBLIC_APP_NAME}
-                loading="eager"
-                width={36}
-                height={36}
-                className="relative z-10 hidden dark:block group-hover:rotate-12 transition-transform duration-500"
-              />
-            </div>
-
             <motion.div
               layoutId="header-title"
               transition={{ type: "spring", bounce: 0.3 }}
@@ -66,7 +48,9 @@ const Header = ({ title, isProfile, leftAction }: HeaderProps) => {
       </div>
 
       {/* Profile Container */}
-      {showProfile && <ProfileAvatar />}
+      {showProfile && (
+        <ProfileAvatar />
+      )}
     </motion.header>
   )
 }

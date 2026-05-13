@@ -1,7 +1,7 @@
 "use client";
 
-import AppTabs from "@/components/app-tabs";
 import { useUserConfig } from "@/components/providers/user-config-provider";
+import AppTabs from "@/components/tab/app-tabs";
 import { t } from "@/lib/languages/i18n";
 import { useAdminUsers } from "@/tanstacks/admin";
 import { Settings as SettingsIcon, Users } from "lucide-react";

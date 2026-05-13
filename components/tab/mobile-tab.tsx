@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { TabItem } from "./tab-item";
-import { useNavItems } from "./use-nav-items";
+import { TabItem } from "../navbar/tab-item";
+import { useNavItems } from "../navbar/use-nav-items";
 
 interface MobileNavProps {
     navItems?: (TabItem & { active?: boolean })[];

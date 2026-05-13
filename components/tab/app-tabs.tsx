@@ -4,9 +4,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { LoadingScreen } from "./loading-screen";
-import MobileNav from "./navbar/mobile-nav";
-import { TabItem } from "./navbar/tab-item";
+import { TabItem } from "../navbar/tab-item";
+import MobileNav from "./mobile-tab";
+import { LoadingScreen } from "../loading-screen";
 
 interface AppTabsProps {
     tabs: TabItem[];
