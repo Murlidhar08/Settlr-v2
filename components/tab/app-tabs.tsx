@@ -4,15 +4,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { LoadingScreen } from "../loading-screen";
 import { TabItem } from "../navbar/tab-item";
 import MobileNav from "./mobile-tab";
-import { LoadingScreen } from "../loading-screen";
 
 interface AppTabsProps {
     tabs: TabItem[];
     defaultTab?: string;
     className?: string;
 }
+
+const SPRING_TRANSITION = { type: "spring", stiffness: 400, damping: 30 } as const;
 
 export default function AppTabs({ tabs, defaultTab, className = "w-full" }: AppTabsProps) {
     const [activeTab, setActiveTab] = useState<string>(
@@ -83,7 +85,7 @@ export default function AppTabs({ tabs, defaultTab, className = "w-full" }: AppT
                     onMouseUp={handleMouseUp}
                     onMouseMove={handleMouseMove}
                     className={cn(
-                        "relative w-full flex items-center justify-start h-auto p-1.5 bg-slate-100/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-[1.5rem] border border-slate-200/50 dark:border-slate-700/50 overflow-x-auto scrollbar-hide no-scrollbar flex-nowrap shrink-0 transition-all select-none",
+                        "relative w-full flex items-center justify-start h-auto p-1.5 bg-slate-100/30 dark:bg-slate-900/30 backdrop-blur-xl rounded-[1.25rem] border border-slate-200/50 dark:border-slate-800/50 overflow-x-auto scrollbar-hide no-scrollbar flex-nowrap shrink-0 transition-all select-none",
                         isDragging ? "cursor-grabbing" : "cursor-grab"
                     )}
                 >
@@ -93,16 +95,16 @@ export default function AppTabs({ tabs, defaultTab, className = "w-full" }: AppT
                             <TabsTrigger
                                 key={tab.id}
                                 value={tab.id}
-                                className="group relative flex items-center gap-2.5 px-6 py-3 rounded-2xl text-muted-foreground data-[state=active]:text-indigo-600 dark:data-[state=active]:text-indigo-400 font-black text-[11px] tracking-widest transition-all uppercase whitespace-nowrap bg-transparent z-10 border-none shadow-none ring-0 focus-visible:ring-0 shrink-0 flex-none"
+                                className="group relative flex items-center gap-2 px-5 py-2.5 rounded-xl text-muted-foreground data-[state=active]:text-primary font-black text-[10px] tracking-widest transition-all uppercase whitespace-nowrap bg-transparent z-10 border-none shadow-none ring-0 focus-visible:ring-0 shrink-0 flex-none"
                             >
-                                <span className={cn("transition-transform duration-300", isActive && "scale-110")}>
+                                <span className={cn("transition-all duration-300 [&>svg]:size-4", isActive && "scale-110 text-primary")}>
                                     {tab.icon}
                                 </span>
 
                                 <span className="relative">
                                     {tab.label}
                                     {!!tab.badgeCount && (
-                                        <div className="absolute -top-3 -right-5 flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 text-[8px] font-black text-white shadow-lg shadow-indigo-100 ring-2 ring-white dark:ring-slate-900 animate-in zoom-in duration-300">
+                                        <div className="absolute -top-3 -right-5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[8px] font-black text-white shadow-lg shadow-primary/20 ring-2 ring-white dark:ring-slate-900 animate-in zoom-in duration-300">
                                             {tab.badgeCount > 99 ? '99+' : tab.badgeCount}
                                         </div>
                                     )}
@@ -111,8 +113,8 @@ export default function AppTabs({ tabs, defaultTab, className = "w-full" }: AppT
                                 {isActive && (
                                     <motion.div
                                         layoutId="tabBackground"
-                                        className="absolute inset-0 bg-white dark:bg-slate-900 rounded-2xl shadow-sm z-[-1]"
-                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                        className="absolute inset-0 bg-white dark:bg-slate-800 rounded-xl shadow-xs z-[-1]"
+                                        transition={SPRING_TRANSITION}
                                     />
                                 )}
                             </TabsTrigger>

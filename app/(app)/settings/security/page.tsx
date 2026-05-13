@@ -1,7 +1,7 @@
 "use client";
 
 import { getListUserAccounts } from "@/actions/user-settings.actions";
-import AppTabs from "@/components/app-tabs";
+import AppTabs from "@/components/tab/app-tabs";
 import { BackHeader } from "@/components/back-header";
 import { useUserConfig } from "@/components/providers/user-config-provider";
 import { Skeleton } from "@/components/ui/skeleton";

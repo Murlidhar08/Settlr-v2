@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { TabItem } from "../navbar/tab-item";
 import { useNavItems } from "../navbar/use-nav-items";
 
+const SPRING_TRANSITION = { type: "spring", stiffness: 400, damping: 30 } as const;
+
 interface MobileNavProps {
     navItems?: (TabItem & { active?: boolean })[];
     onChange?: (value: string) => void;
@@ -29,11 +31,11 @@ export default function MobileNav({ navItems: propNavItems, onChange }: MobileNa
     return (
         <>
             <div className="fixed bottom-6 left-0 right-0 z-50 flex justify-center lg:hidden px-6">
-                <nav className="w-full max-w-[400px] h-20 px-3 bg-background/80 dark:bg-card/80 backdrop-blur-3xl border border-border/50 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] flex items-center justify-center gap-2 relative">
+                <nav className="w-full max-w-[440px] h-16 p-2 bg-background/70 dark:bg-card/60 backdrop-blur-3xl border border-border/50 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] rounded-3xl flex items-center justify-between relative overflow-hidden">
                     {navItems.map((item) => {
                         const active = item.active !== undefined
                             ? item.active
-                            : (item.href ? pathname?.startsWith(item.href) : false);
+                            : (item.href ? pathname === item.href : false);
 
                         return (
                             <MobileNavItem
@@ -48,7 +50,7 @@ export default function MobileNav({ navItems: propNavItems, onChange }: MobileNa
             </div>
 
             {/* Mobile bottom shade */}
-            <div className="fixed bottom-0 left-0 right-0 z-40 bg-linear-to-t from-background to-transparent h-28 pointer-events-none lg:hidden"></div>
+            <div className="fixed bottom-0 left-0 right-0 z-40 bg-linear-to-t from-background via-background/80 to-transparent h-32 pointer-events-none lg:hidden opacity-80"></div>
         </>
     );
 }
@@ -63,12 +65,13 @@ interface MobileNavItemProps {
 
 function MobileNavItem({ icon, label, active, href, onChange }: MobileNavItemProps) {
     const isHash = href?.startsWith("#");
+
     const handleClick = (e: React.MouseEvent) => {
         if (isHash && href && onChange) {
             e.preventDefault();
             onChange(href.replace("#", ""));
-        } else if (onChange) {
-            onChange(href || "");
+        } else if (onChange && href) {
+            onChange(href);
         }
     };
 
@@ -77,38 +80,44 @@ function MobileNavItem({ icon, label, active, href, onChange }: MobileNavItemPro
             href={(href || "#") as any}
             onClick={handleClick}
             aria-label={label}
-            className="flex flex-col items-center justify-center transition-all duration-300 active:scale-95 group h-14 flex-1 max-w-[100px] relative"
+            className="relative flex-1 flex items-center justify-center h-full group"
         >
             <div className={clsx(
-                "relative flex flex-col items-center justify-center h-full w-full transition-all duration-500 rounded-3xl overflow-hidden",
-                active
-                    ? "bg-primary/10 text-primary"
-                    : "bg-transparent text-muted-foreground hover:bg-muted/10"
+                "relative z-10 flex items-center justify-center transition-all duration-300",
+                active ? "text-primary scale-110" : "text-muted-foreground hover:text-foreground active:scale-90"
             )}>
-                {/* ICON with smooth transition */}
-                <div className="relative w-6 h-6 flex items-center justify-center">
+                <div className="flex items-center justify-center [&>svg]:size-5">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={active ? "active" : "inactive"}
-                            initial={{ opacity: 0, scale: 0.5, rotate: active ? -15 : 15 }}
-                            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                            exit={{ opacity: 0, scale: 0.5 }}
-                            className="absolute inset-0 flex items-center justify-center"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
                         >
                             {icon}
                         </motion.div>
                     </AnimatePresence>
                 </div>
-
-                {/* Animated Active Background Indicator */}
-                {active && (
-                    <motion.div
-                        layoutId="active-pill"
-                        className="absolute inset-0 bg-primary/10 -z-10"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                )}
             </div>
+
+            {/* Sliding Active Background Indicator */}
+            {active && (
+                <motion.div
+                    layoutId="mobile-nav-active"
+                    className="absolute inset-x-1 inset-y-0.5 bg-primary/10 dark:bg-primary/20 rounded-2xl z-0"
+                    transition={SPRING_TRANSITION}
+                />
+            )}
+
+            {/* Tiny active dot */}
+            {active && (
+                <motion.div
+                    layoutId="mobile-nav-dot"
+                    className="absolute bottom-1 w-1 h-1 bg-primary rounded-full"
+                    transition={SPRING_TRANSITION}
+                />
+            )}
         </Link>
     );
 }
