@@ -16,7 +16,7 @@ export default async function Page() {
       <AppHeader title={t("dashboard.title", language)} />
 
       <div className="flex-1 px-4 space-y-6 sm:space-y-8 pb-34">
-        Hello, {firstName}.
+        Hello, {firstName} ....
 
         <h1>Here is your language</h1>
         <p>{language}</p>
