@@ -6,4 +6,4 @@
 `git remote add upstream https://github.com/Murlidhar08/next-auth-template.git`
 
 # Add from upstream
-`git remote update upstream`
+`git remote update upstream `
