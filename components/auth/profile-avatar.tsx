@@ -47,6 +47,7 @@ export default function ProfileAvatar() {
                     </Avatar>
                 }
             />
+
             <DropdownMenuContent align="end" className="w-64 p-2">
                 <DropdownMenuGroup>
                     <DropdownMenuLabel className="font-normal">
@@ -59,39 +60,6 @@ export default function ProfileAvatar() {
                     </DropdownMenuLabel>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-
-                {/* TODO: PENDING - Multiple Accounts  */}
-                {/* <DropdownMenuGroup>
-                    <DropdownMenuLabel className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">
-                        Switch account
-                    </DropdownMenuLabel>
-
-                    {deviceSessions?.filter((s: any) => s.session.id !== session?.session?.id).map((activeSession: any) => (
-                        <DropdownMenuItem
-                            key={activeSession.session.id}
-                            onClick={() => handleSwitchAccount(activeSession.session.token)}
-                            className="cursor-pointer py-2"
-                        >
-                            <Avatar className="h-6 w-6 mr-2">
-                                <AvatarImage src={activeSession.user.image || ''} />
-                                <AvatarFallback className="text-[10px]">
-                                    {getInitials(activeSession.user.name)}
-                                </AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col flex-1 overflow-hidden">
-                                <span className="text-sm font-medium truncate">{activeSession.user.name}</span>
-                            </div>
-                        </DropdownMenuItem>
-                    ))}
-
-                    {(deviceSessions?.length || 1) < 3 && (
-                        <DropdownMenuItem onClick={handleAddAccount} className="cursor-pointer py-2">
-                            <Plus className="h-4 w-4 mr-2 bg-muted rounded-full p-0.5" />
-                            <span>Add account</span>
-                        </DropdownMenuItem>
-                    )}
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator /> */}
 
                 <DropdownMenuItem onClick={handleManageProfile} className="cursor-pointer py-2">
                     <UserIcon className="h-4 w-4 mr-2" />
