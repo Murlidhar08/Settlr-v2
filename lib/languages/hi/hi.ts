@@ -72,6 +72,7 @@ export default {
         not_connected: "जुड़ा नहीं है",
         unlink: "लिंक हटाएं",
         connect: "जोड़ें",
+        linked_on: "जुड़ने की तिथि: {date} को {time} बजे",
     },
     session: {
         title: "सक्रिय सत्र",

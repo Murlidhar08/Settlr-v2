@@ -72,6 +72,7 @@ export default {
         not_connected: "Not Connected",
         unlink: "Unlink",
         connect: "Connect",
+        linked_on: "Linked on: {date} at {time}",
     },
     session: {
         title: "Active Sessions",

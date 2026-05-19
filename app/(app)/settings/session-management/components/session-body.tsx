@@ -1,11 +1,10 @@
 'use client'
 
 import { BetterAuthActionButton } from '@/components/auth/better-auth-action-button'
-import { useUserConfig } from '@/components/providers/user-config-provider'
 import { authClient } from '@/lib/auth/auth-client'
 import { tran } from '@/lib/languages/i18n'
 import { cn } from '@/lib/utils'
-import { formatDate } from '@/utility/commonFunction'
+import { formatUserDate, formatUserTime } from '@/utility/dateTimeFn'
 import { Session } from 'better-auth'
 import { motion } from 'framer-motion'
 import { Globe, Monitor, Smartphone, Trash2 } from 'lucide-react'
@@ -100,7 +99,6 @@ function SessionCard({
     onUpdate?: () => void
     isCurrentSession?: boolean
 }) {
-    const { dateFormat } = useUserConfig()
     const router = useRouter()
     const ua = session.userAgent ? (() => {
         const lowerUA = session.userAgent.toLowerCase();
@@ -143,13 +141,11 @@ function SessionCard({
     }
 
     function format(date: Date) {
-        return formatDate(date, dateFormat)
+        return formatUserDate(date)
     }
 
     function getTime(date: Date) {
-        return new Intl.DateTimeFormat(undefined, {
-            timeStyle: 'short',
-        }).format(new Date(date))
+        return formatUserTime(date)
     }
 
     function revokeSession() {

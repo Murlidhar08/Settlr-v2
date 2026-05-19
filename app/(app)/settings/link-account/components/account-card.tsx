@@ -10,6 +10,7 @@ import {
 } from '@/lib/auth/o-auth-providers'
 import { tran } from '@/lib/languages/i18n'
 import { cn } from '@/lib/utils'
+import { formatUserDate, formatUserTime } from '@/utility/dateTimeFn'
 import { motion } from 'framer-motion'
 import { Plus, Shield, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -24,6 +25,7 @@ export default function AccountCard({
     account?: Account
 }) {
     const router = useRouter()
+
     const providerDetails =
         SUPPORTED_OAUTH_PROVIDER_DETAILS[
         provider as SupportedOAuthProvider
@@ -73,11 +75,21 @@ export default function AccountCard({
                     <div>
                         <p className="font-bold text-base leading-tight">{providerDetails.name}</p>
                         {account ? (
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-primary/60 mt-0.5">
-                                {tran("linked_accounts.verified")}
-                            </p>
+                            <div className="flex flex-col gap-0.5 mt-1">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-primary/60">
+                                    {tran("linked_accounts.verified")}
+                                </p>
+                                {account.createdAt && (
+                                    <p className="text-[11px] font-bold text-muted-foreground/60">
+                                        {tran("linked_accounts.linked_on", {
+                                            date: formatUserDate(account.createdAt),
+                                            time: formatUserTime(account.createdAt)
+                                        })}
+                                    </p>
+                                )}
+                            </div>
                         ) : (
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 mt-0.5">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 mt-1">
                                 {tran("linked_accounts.not_connected")}
                             </p>
                         )}

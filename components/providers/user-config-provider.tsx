@@ -3,6 +3,7 @@
 import { Currency, ThemeMode } from "@/lib/generated/prisma/enums"
 import { setActiveLanguage } from "@/lib/languages/i18n"
 import { useTheme } from "next-themes"
+import { setGlobalUserConfig } from "@/utility/dateTimeFn"
 import { createContext, useContext, useEffect, useState } from "react"
 
 interface userSettings {
@@ -31,6 +32,8 @@ export const useUserConfig = () => {
 export function UserConfigProvider({ config, children }: { config: Omit<userSettings, 'setTheme'>, children: React.ReactNode }) {
   // Set the active language globally for hook-free translations
   setActiveLanguage(config.language)
+  // Set the global user date/time preferences for hook-free formatting
+  setGlobalUserConfig(config)
 
   const [theme, setThemeState] = useState<ThemeMode>(config.theme)
   const { setTheme: setNextTheme } = useTheme()
@@ -42,7 +45,8 @@ export function UserConfigProvider({ config, children }: { config: Omit<userSett
 
   useEffect(() => {
     setActiveLanguage(config.language)
-  }, [config.language])
+    setGlobalUserConfig(config)
+  }, [config.language, config.dateFormat, config.timeFormat])
 
   useEffect(() => {
     if (theme) {
