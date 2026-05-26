@@ -41,8 +41,8 @@ const NavBar = () => {
                 {/* Header */}
                 <div className="flex items-center gap-3 px-3 py-6 relative shrink-0">
                     <div className="h-10 w-10 shrink-0 flex items-center justify-center relative rounded-xl bg-sidebar-accent/10">
-                        <Image src="/images/logo/light_logo.svg" alt="Logo" width={28} height={28} className="dark:hidden" />
-                        <Image src="/images/logo/dark_logo.svg" alt="Logo" width={28} height={28} className="hidden dark:block" />
+                        <Image src="/images/logo/light_logo.png" alt="Logo" width={28} height={28} className="dark:hidden" />
+                        <Image src="/images/logo/dark_logo.png" alt="Logo" width={28} height={28} className="hidden dark:block" />
                     </div>
 
                     {!collapsed && (

@@ -49,8 +49,8 @@ const Header = ({ title, isProfile }: HeaderProps) => {
               <SheetHeader className="mb-6 px-2">
                 <SheetTitle className="flex items-center gap-3 text-sidebar-foreground text-left font-black tracking-tighter text-2xl">
                   <div className="h-10 w-10 shrink-0 flex items-center justify-center relative rounded-xl bg-sidebar-accent/10">
-                    <Image src="/images/logo/light_logo.svg" alt="Logo" width={28} height={28} className="dark:hidden" />
-                    <Image src="/images/logo/dark_logo.svg" alt="Logo" width={28} height={28} className="hidden dark:block" />
+                    <Image src="/images/logo/light_logo.png" alt="Logo" width={28} height={28} className="dark:hidden" />
+                    <Image src="/images/logo/dark_logo.png" alt="Logo" width={28} height={28} className="hidden dark:block" />
                   </div>
                   {envClient.NEXT_PUBLIC_APP_NAME}
                 </SheetTitle>

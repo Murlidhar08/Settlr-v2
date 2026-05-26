@@ -36,6 +36,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png"
       },
       {
+        purpose: "maskable",
         src: '/images/logo/maskable_icon_x192.png',
         sizes: '192x192',
         type: 'image/png',
@@ -47,6 +48,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png"
       },
       {
+        purpose: "maskable",
         src: '/images/logo/maskable_icon_x512.png',
         sizes: '512x512',
         type: 'image/png',

@@ -80,7 +80,7 @@ export default function BannedPage() {
             <div className="absolute inset-0 bg-primary/10 rounded-2xl blur-lg group-hover:bg-primary/20 transition-colors" />
             <div className="relative z-10 p-2 bg-background rounded-2xl border border-border/50 shadow-sm group-hover:border-primary/50 transition-colors">
               <Image
-                src="/images/logo/light_logo.svg"
+                src="/images/logo/light_logo.png"
                 alt={envClient.NEXT_PUBLIC_APP_NAME}
                 loading="eager"
                 width={32}
@@ -88,7 +88,7 @@ export default function BannedPage() {
                 className="dark:hidden group-hover:rotate-12 transition-transform duration-500"
               />
               <Image
-                src="/images/logo/dark_logo.svg"
+                src="/images/logo/dark_logo.png"
                 alt={envClient.NEXT_PUBLIC_APP_NAME}
                 loading="eager"
                 width={32}
@@ -199,7 +199,7 @@ export default function BannedPage() {
           >
             <div className="absolute inset-0 bg-white/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <Image
-              src="/images/logo/dark_logo.svg"
+              src="/images/logo/dark_logo.png"
               alt={envClient.NEXT_PUBLIC_APP_NAME}
               loading="eager"
               width={80}
