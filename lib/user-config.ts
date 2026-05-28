@@ -1,5 +1,5 @@
 import { getUserSession } from "./auth/auth";
-import { ThemeMode } from "./generated/prisma/enums";
+import { Currency, ThemeMode } from "./generated/prisma/enums";
 
 export const getUserConfig = async () => {
   const session = await getUserSession()
@@ -11,6 +11,7 @@ export const getUserConfig = async () => {
 
 export function getDefaultConfig() {
   return {
+    currency: Currency.INR,
     dateFormat: "dd/MM/yyyy",
     timeFormat: "hh:mm a",
     language: "en",
