@@ -193,7 +193,6 @@ export const auth = betterAuth({
   },
   plugins: [
     adminPlugin(),
-    nextCookies(),
     twoFactor(),
     lastLoginMethod(),
     passkey(),
@@ -266,7 +265,8 @@ export const auth = betterAuth({
       enabled: envServer.NODE_ENV === 'production',
       customPasswordCompromisedMessage: "This password has appeared in data breaches. Please choose a stronger, unique password."
     }),
-    username()
+    username(),
+    nextCookies()
   ],
   databaseHooks: {
     user: {
