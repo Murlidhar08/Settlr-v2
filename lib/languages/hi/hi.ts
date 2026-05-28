@@ -4,25 +4,20 @@ export default {
         cancel: "रद्द करें",
         delete: "हटाएं",
         search: "खोजें...",
-    },
-    nav: {
         collapse: "छोटा करें",
-        dashboard: "डैशबोर्ड",
-        admin: "एडमिन",
-        settings: "सेटिंग्स",
-    },
-    languages: {
-        en: "अंग्रेजी (English)",
-        hi: "हिन्दी (Hindi)"
+        search_parties: "नाम, फ़ोन खोजें...",
+        search_cashbook: "विवरण या राशि खोजें...",
+        all: "सभी",
+        today: "आज",
+        select_dates: "तिथियां चुनें",
     },
     auth: {
         msg: {
             session_expired: "आपका सत्र समाप्त हो गया है। कृपया फिर से लॉगिन करें।",
         }
     },
-    dashboard: {
-        title: "डैशबोर्ड",
-    },
+
+    // Settings Page
     settings: {
         title: "सेटिंग्स",
         general: "सामान्य प्राथमिकताएं",
@@ -49,6 +44,10 @@ export default {
             dev_mode_enabled: "डेवलपर मोड सक्षम किया गया",
             dev_mode_disabled: "डेवलपर मोड अक्षम किया गया",
         }
+    },
+    languages: {
+        en: "अंग्रेजी (English)",
+        hi: "हिन्दी (Hindi)"
     },
     danger: {
         title: "खतरे का क्षेत्र",
@@ -99,10 +98,10 @@ export default {
             required: "आवश्यक",
             min_length_8: "कम से कम 8 अक्षर लंबा होना चाहिए",
             msg: {
+                recovery_link_sent: "रिकवरी लिंक आपके ईमेल पर भेज दिया गया है",
                 password_updated: "पासवर्ड सफलतापूर्वक अपडेट किया गया",
                 password_update_failed: "पासवर्ड अपडेट करने में विफल",
                 enter_current_password: "कृपया अपना वर्तमान पासवर्ड दर्ज करें",
-                recovery_link_sent: "रिकवरी लिंक आपके ईमेल पर भेज दिया गया है",
             }
         },
         passkeys: {
@@ -165,17 +164,18 @@ export default {
             }
         },
     },
+
+    // Admin Page
     admin: {
-        title: "एडमिन पैनल",
+        title: "एडमिन",
         access_restricted: "पहुंच प्रतिबंधित है",
         restricted_description: "आपके पास इस प्रशासनिक संसाधन तक पहुँचने के लिए आवश्यक अनुमति नहीं है।",
         return_to_dashboard: "डैशबोर्ड पर वापस जाएं",
-        user_management: "उपयोगकर्ता प्रबंधन",
-        application_settings: "एप्लिकेशन सेटिंग्स",
 
         user_mng: {
-            // Status
             title: "उपयोगकर्ता प्रबंधन",
+
+            // Status
             total_users: "कुल उपयोगकर्ता",
             active: "सक्रिय",
             banned: "प्रतिबंधित",
@@ -229,6 +229,7 @@ export default {
         },
         app_config: {
             title: "एप्लिकेशन सेटिंग्स",
+
             general_branding: "सामान्य और ब्रांडिंग",
             general_branding_desc: "मुख्य एप्लिकेशन पहचान और वैश्विक सेटिंग्स।",
             app_name: "एप्लिकेशन का नाम",
@@ -258,7 +259,189 @@ export default {
                 app_name_required: "एप्लिकेशन का नाम आवश्यक है",
                 description_required: "विवरण आवश्यक है",
                 invalid_email_format: "अमान्य ईमेल प्रारूप। 'email@example.com' या 'नाम <email@example.com>' का उपयोग करें",
-            }
+            },
         },
+    },
+
+    // Dashboard Page
+    dashboard: {
+        title: "डैशबोर्ड",
+        recent_transactions: "हाल के लेनदेन",
+        view_all: "सभी देखें",
+        cashflow_trend: "कैशफ्लो ट्रेंड",
+        balance_overview: "शेष राशि का अवलोकन",
+        cash_flow: "आज का कैश फ्लो",
+        receivables: "प्राप्य (Receivables)",
+        payables: "देय (Payables)",
+        you_get: "आपको मिलेंगे",
+        you_give: "आपको देने हैं",
+        surplus: "दैनिक अधिशेष (Surplus)",
+        deficit: "दैनिक घाटा (Deficit)",
+        total_balance: "कुल शेष",
+        no_transactions: "अभी तक कोई लेनदेन नहीं",
+        spending_insight: "व्यय अंतर्दृष्टि",
+        highest_expense_msg: "इस महीने आपका सबसे बड़ा खर्च \"{name}\" है जो {amount} है।",
+        monthly_summary: "मासिक सारांश",
+        monthly_inflow: "मासिक आवक",
+        monthly_outflow: "मासिक जावक",
+        balance: "शेष",
+        no_spending_alerts: "इस महीने के लिए कोई विशिष्ट खर्च अलर्ट नहीं है।",
+        distribution_across: "खातों में वितरण",
+        of_total: "कुल का",
+    },
+    business: {
+        label: "व्यवसाय",
+        switch: "व्यवसाय बदलें",
+        manage: "व्यवसाय प्रबंधित करें",
+        manage_businesses: "व्यवसाय प्रबंधित करें",
+        your_businesses: "आपके व्यवसाय",
+        manage_and_organize: "अपनी व्यावसायिक संस्थाओं को प्रबंधित और व्यवस्थित करें",
+        add_new: "नया जोड़ें",
+        new_business: "नया व्यवसाय",
+        enter_name: "व्यवसाय का नाम दर्ज करें...",
+        create: "बनाएं",
+        no_businesses: "कोई व्यवसाय नहीं मिला। शुरू करने के लिए एक जोड़ें।",
+        business_id: "व्यवसाय आईडी",
+        active: "सक्रिय",
+        hold_on: "रुकिए!",
+        delete_confirm: "यह स्थायी रूप से \"{name}\" और उससे जुड़े सभी डेटा (लेन-देन, पक्ष आदि) को हटा देगा। इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।",
+        yes_delete: "हाँ, व्यवसाय हटाएं",
+        msg: {
+            switched: "सक्रिय व्यवसाय बदल दिया गया",
+            switch_failed: "व्यवसाय बदलने में विफल",
+            created: "व्यवसाय सफलतापूर्वक बनाया गया",
+            create_failed: "व्यवसाय बनाने में विफल",
+            updated: "व्यवसाय सफलतापूर्वक अपडेट किया गया",
+            update_failed: "व्यवसाय अपडेट करने में विफल",
+            deleted: "व्यवसाय सफलतापूर्वक हटा दिया गया",
+            delete_failed: "व्यवसाय हटाने में विफल",
+        }
+    },
+
+    // Accounts Page
+    accounts: {
+        title: "खाते",
+        overview: "पोर्टफोलियो अवलोकन",
+        total: "कुल {count} खाते",
+        new: "नया खाता",
+        not_found: "कोई खाता नहीं मिला",
+        description: "अपने नकद, बैंक शेष और डिजिटल वॉलेट को एक ही स्थान पर ट्रैक करें।",
+        get_started: "शुरू करें",
+        money_title: "मनी खाते",
+        money_subtitle: "नकद और बैंक शेष",
+        party_title: "पार्टी खाते",
+        party_subtitle: "ग्राहक और आपूर्तिकर्ता",
+        business_title: "व्यावसायिक खाते",
+        business_subtitle: "श्रेणियां और आंतरिक",
+        primary: "प्राथमिक",
+        set_primary: "प्राथमिक के रूप में सेट करें",
+        def_income: "डिफ़ॉल्ट आय",
+        set_def_income: "डिफ़ॉल्ट आय सेट करें",
+        def_expense: "डिफ़ॉल्ट व्यय",
+        set_def_expense: "डिफ़ॉल्ट व्यय सेट करें",
+        current_standing: "वर्तमान स्थिति",
+        total_in: "कुल प्राप्त",
+        total_out: "कुल भुगतान",
+        statement_ledger: "विवरण बही",
+        loading_more: "अधिक लोड हो रहा है...",
+        end_of_records: "रिकॉर्ड्स का अंत",
+        new_entry: "नई प्रविष्टि",
+        add_entry: "प्रविष्टि जोड़ें",
+        msg: {
+            default_updated: "डिफ़ॉल्ट खाता अपडेट किया गया",
+            default_update_failed: "डिफ़ॉल्ट खाता अपडेट करने में विफल",
+        }
+    },
+
+    // Parties Page
+    parties: {
+        title: "पार्टियां",
+        customers: "ग्राहक",
+        suppliers: "आपूर्तिकर्ता",
+        employees: "कर्मचारी",
+        other: "अन्य",
+        add_new_customer: "नया ग्राहक जोड़ें",
+        add_new_supplier: "नया आपूर्तिकर्ता जोड़ें",
+        add_new_employee: "नया कर्मचारी जोड़ें",
+        add_new_party: "नया पक्ष जोड़ें",
+        directory_entry: "निर्देशिका प्रविष्टि",
+        full_name_business: "पूरा नाम / व्यावसायिक शीर्षक",
+        reliance_placeholder: "उदा. रिलायंस इंडस्ट्रीज लिमिटेड",
+        primary_contact: "प्राथमिक संपर्क नंबर",
+        phone_placeholder: "+91 00000 00000 (वैकल्पिक)",
+        discard: "रद्द करें",
+        hang_on: "एक पल...",
+        create_customer: "ग्राहक बनाएं",
+        create_supplier: "आपूर्तिकर्ता बनाएं",
+        create_employee: "कर्मचारी बनाएं",
+        create_party: "पक्ष बनाएं",
+        total_balance: "कुल शेष",
+        to_collect: "लेना है",
+        to_pay: "देना है",
+        settled: "चुकता",
+        no_contact: "कोई संपर्क जानकारी नहीं",
+        no_parties_found: "कोई {type} नहीं मिला",
+        no_results_search: "हमें आपकी खोज के लिए कोई परिणाम नहीं मिल सका। त्रुटियों की जांच करें या व्यापक शब्द का उपयोग करें।",
+        party_not_found: "पक्ष नहीं मिला",
+        search_transactions: "लेनदेन खोजें...",
+        current_month: "चालू माह",
+        year: "वर्ष",
+        all: "सभी",
+        new_balance_receive: "प्राप्त करने योग्य शुद्ध शेष",
+        new_balance_pay: "भुगतान योग्य शुद्ध शेष",
+        you_pay: "आप भुगतान करें",
+        you_receive: "आपको प्राप्त",
+        msg: {
+            add_failed: "पक्ष जोड़ने में विफल",
+            name_required: "पक्ष का नाम आवश्यक है",
+            added: "पक्ष सफलतापूर्वक जोड़ा गया",
+        }
+    },
+
+    // Cashbook Page
+    cashbook: {
+        title: "कैशबुक",
+        you_pay: "आपने भुगतान किया",
+        you_receive: "आपको प्राप्त हुआ",
+        add_transaction: "लेनदेन जोड़ें",
+        aggregate_balance: "कुल नकद शेष",
+        total_inflow: "कुल आवक",
+        total_outflow: "कुल जावक",
+        no_transactions_filter: "आपके फिल्टर से मेल खाने वाला कोई लेनदेन नहीं मिला।",
+        new_entry: "नई प्रविष्टि",
+        add_entry: "प्रविष्टि जोड़ें",
+    },
+
+    // Transaction page
+    transactions: {
+        transfer: "स्थानांतरण: {from} से {to} में",
+        cashbook: "कैशबुक प्रविष्टि",
+        payment_received: "भुगतान प्राप्त हुआ",
+        payment_sent: "भुगतान भेजा गया",
+        details: "लेनदेन का विवरण",
+        audit: "लेनदेन ऑडिट",
+        net_impact: "शुद्ध प्रभाव",
+        inward: "आवक",
+        outward: "जावक",
+        flow_pathway: "प्रवाह मार्ग",
+        origin: "स्रोत",
+        destination: "गंतव्य",
+        audit_trail: "ऑडिट ट्रेल",
+        ref_number: "संदर्भ संख्या",
+        entity_relation: "संस्था संबंध",
+        log_originator: "ऑडिट निर्माता",
+        recorded_at: "रिकॉर्ड किया गया",
+        modified_history: "संशोधन इतिहास",
+        narrative: "विवरण",
+        edit_entry_audit: "प्रविष्टि ऑडिट संपादित करें",
+        edit_entry: "प्रविष्टि संपादित करें",
+        delete_permanent: "स्थायी रूप से हटाएं",
+        delete_title: "लेनदेन हटाएं?",
+        delete_desc: "इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।",
+        yes_delete: "हाँ, हटाएं",
+        msg: {
+            deleted: "लेनदेन सफलतापूर्वक हटा दिया गया",
+            delete_failed: "लेनदेन हटाने में विफल",
+        }
     },
 }

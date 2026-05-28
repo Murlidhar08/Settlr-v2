@@ -1,17 +1,17 @@
 import { getRecentTransactions } from "@/actions/transaction.actions";
 import { DashboardTransactionItem } from "./transaction-item";
-import { t } from "@/lib/languages/i18n";
+import { tran } from "@/lib/languages/i18n";
 import { getUserConfig } from "@/lib/user-config";
 
 export default async function RecentTransaction() {
   const recentTransactions = await getRecentTransactions();
-  const { currency, language } = await getUserConfig();
+  const { currency } = await getUserConfig();
 
   return (
     <div className="space-y-3">
       {recentTransactions.length === 0 && (
         <p className="text-sm text-slate-500 text-center py-8">
-          {t("dashboard.no_transactions", language)}
+          {tran("dashboard.no_transactions")}
         </p>
       )}
 

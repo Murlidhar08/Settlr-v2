@@ -1,8 +1,9 @@
 "use client"
 
 import { Currency } from "@/lib/generated/prisma/enums";
-import { getCurrencySymbol } from "@/utility/transaction";
+import { formatAmount, getCurrencySymbol } from "@/utility/transaction";
 import { motion } from "framer-motion";
+import { tran } from "@/lib/languages/i18n";
 
 interface CashSummaryProp {
   totalIn: number
@@ -35,12 +36,6 @@ export default function CashSummary({
 
   const symbol = getCurrencySymbol(currency)
 
-  const formatAmount = (value: number) =>
-    value.toLocaleString("en-IN", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -49,7 +44,7 @@ export default function CashSummary({
       className="mt-6 rounded-3xl sm:rounded-[2.5rem] bg-card p-5 sm:p-8 shadow-xs border border-border/50 relative overflow-hidden"
     >
       <p className="text-center text-[10px] sm:text-xs font-black uppercase text-muted-foreground tracking-[0.2em] sm:tracking-[0.3em] opacity-70">
-        Aggregate Cash Balance
+        {tran("cashbook.aggregate_balance")}
       </p>
 
       <motion.h2
@@ -75,7 +70,7 @@ export default function CashSummary({
           <p className="text-lg sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
             +{symbol}{formatAmount(totalIn)}
           </p>
-          <span className="text-[9px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-widest opacity-60">Total Inflow</span>
+          <span className="text-[9px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-widest opacity-60">{tran("cashbook.total_inflow")}</span>
         </motion.div>
 
         {/* Total Out */}
@@ -90,7 +85,7 @@ export default function CashSummary({
           <p className="text-lg sm:text-2xl font-black text-rose-600 dark:text-rose-400 tracking-tight">
             -{symbol}{formatAmount(totalOut)}
           </p>
-          <span className="text-[9px] sm:text-xs font-black text-muted-foreground uppercase tracking-widest opacity-60">Total Outflow</span>
+          <span className="text-[9px] sm:text-xs font-black text-muted-foreground uppercase tracking-widest opacity-60">{tran("cashbook.total_outflow")}</span>
         </motion.div>
       </div>
     </motion.div>

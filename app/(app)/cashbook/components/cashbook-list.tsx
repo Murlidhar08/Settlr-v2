@@ -2,6 +2,7 @@
 
 import { TransactionList } from "@/components/transaction/transaction-list";
 import { motion } from "framer-motion";
+import { tran } from "@/lib/languages/i18n";
 
 interface CashbookListProps {
     transactions: any[];
@@ -33,7 +34,7 @@ export function CashbookList({ transactions, isLoading }: CashbookListProps) {
                 <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center">
                     <span className="text-2xl">🔍</span>
                 </div>
-                <p className="text-muted-foreground">No transactions found matching your filters.</p>
+                <p className="text-muted-foreground">{tran("cashbook.no_transactions_filter")}</p>
             </motion.div>
         );
     }

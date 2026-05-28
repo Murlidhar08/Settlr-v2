@@ -11,12 +11,12 @@ export const useNavItems = () => {
   const isAdmin = session?.user?.role === UserRole.admin;
 
   const navItems: TabItem[] = [
-    { id: "dashboard", label: tran("nav.dashboard"), icon: <LayoutDashboard size={20} />, href: "/dashboard" },
-    { id: "accounts", label: tran("nav.accounts"), icon: <LandmarkIcon size={20} />, href: "/accounts" },
-    { id: "parties", label: tran("nav.parties"), icon: <User2Icon size={20} />, href: "/parties" },
-    { id: "cashbook", label: tran("nav.cashbook"), icon: <Wallet size={20} />, href: "/cashbook" },
-    { id: "settings", label: tran("nav.settings"), icon: <Settings size={20} />, href: "/settings" },
-    ...(isAdmin ? [{ id: "admin", label: tran("nav.admin"), icon: <UserRoundCog size={20} />, href: "/admin" }] : []),
+    { id: "dashboard", label: tran("dashboard.title"), icon: <LayoutDashboard size={20} />, href: "/dashboard" },
+    { id: "accounts", label: tran("accounts.title"), icon: <LandmarkIcon size={20} />, href: "/accounts" },
+    { id: "parties", label: tran("parties.title"), icon: <User2Icon size={20} />, href: "/parties" },
+    { id: "cashbook", label: tran("cashbook.title"), icon: <Wallet size={20} />, href: "/cashbook" },
+    { id: "settings", label: tran("settings.title"), icon: <Settings size={20} />, href: "/settings" },
+    ...(isAdmin ? [{ id: "admin", label: tran("admin.title"), icon: <UserRoundCog size={20} />, href: "/admin" }] : []),
   ];
 
   return navItems;

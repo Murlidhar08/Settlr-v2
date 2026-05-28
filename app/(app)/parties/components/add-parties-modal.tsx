@@ -10,6 +10,7 @@ import { Building2, Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { ReactNode, useState } from "react"
 import { toast } from "sonner"
+import { tran } from "@/lib/languages/i18n"
 
 /* ========================================================= */
 /* ACTIONS + TYPES */
@@ -69,7 +70,7 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
       if (context?.previousParties) {
         context.previousParties.forEach(([key, value]: any) => queryClient.setQueryData(key, value))
       }
-      toast.error("Failed to add party")
+      toast.error(tran("parties.msg.add_failed"))
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["party-list", type] })
@@ -79,12 +80,12 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
 
   const handleAddParty = async () => {
     if (!data.name.trim()) {
-      return toast.error("Party name is required")
+      return toast.error(tran("parties.msg.name_required"))
     }
 
     partyMutation.mutate(data, {
       onSuccess: () => {
-        toast.success("Party added successfully")
+        toast.success(tran("parties.msg.added"))
         queryClient.invalidateQueries({ queryKey: ["party-list", type] })
         setData({
           type,
@@ -100,12 +101,12 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
   const resolvedTitle =
     title ??
     (type === PartyType.CUSTOMER
-      ? "Add New Customer"
+      ? tran("parties.add_new_customer")
       : type === PartyType.SUPPLIER
-        ? "Add New Supplier"
+        ? tran("parties.add_new_supplier")
         : type === PartyType.EMPLOYEE
-          ? "Add New Employee"
-          : "Add New Party")
+          ? tran("parties.add_new_employee")
+          : tran("parties.add_new_party"))
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,7 +142,7 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
               </div>
               <div>
                 <h2 className="text-xl font-black tracking-tight leading-tight">{resolvedTitle}</h2>
-                <p className="text-[10px] uppercase font-black tracking-widest text-muted-foreground opacity-60">Directory Entry</p>
+                <p className="text-[10px] uppercase font-black tracking-widest text-muted-foreground opacity-60">{tran("parties.directory_entry")}</p>
               </div>
             </div>
           </div>
@@ -156,10 +157,10 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
             >
               <motion.div variants={itemVariants} className="space-y-3">
                 <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 ml-1">
-                  Full Name / Business Title
+                  {tran("parties.full_name_business")}
                 </Label>
                 <Input
-                  placeholder="Ex. Reliance Industries Ltd"
+                  placeholder={tran("parties.reliance_placeholder")}
                   value={data.name}
                   onChange={(e) =>
                     setData((pre) => ({ ...pre, name: e.target.value }))
@@ -171,10 +172,10 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
 
               <motion.div variants={itemVariants} className="space-y-3">
                 <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 ml-1">
-                  Primary Contact Number
+                  {tran("parties.primary_contact")}
                 </Label>
                 <Input
-                  placeholder="+91 00000 00000 (Optional)"
+                  placeholder={tran("parties.phone_placeholder")}
                   inputMode="numeric"
                   value={data.contactNo ?? ""}
                   onChange={(e) =>
@@ -197,7 +198,7 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
                 className="h-14 flex-1 rounded-2xl text-base font-bold border-2"
                 onClick={() => setOpen(false)}
               >
-                Discard
+                {tran("parties.discard")}
               </Button>
 
               <Button
@@ -208,14 +209,14 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
                 {partyMutation.isPending ? (
                   <>
                     <Loader2 className="animate-spin" size={20} />
-                    Hang on...
+                    {tran("parties.hang_on")}
                   </>
                 ) : (
                   <>
-                    Create {type === PartyType.CUSTOMER ? "Customer" :
-                      type === PartyType.SUPPLIER ? "Supplier" :
-                        type === PartyType.EMPLOYEE ? "Employee" :
-                          "Party"}
+                    {type === PartyType.CUSTOMER ? tran("parties.create_customer") :
+                      type === PartyType.SUPPLIER ? tran("parties.create_supplier") :
+                        type === PartyType.EMPLOYEE ? tran("parties.create_employee") :
+                          tran("parties.create_party")}
                   </>
                 )}
               </Button>

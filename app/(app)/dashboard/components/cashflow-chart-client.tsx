@@ -1,7 +1,7 @@
 "use client"
 
 import { Currency } from "@/lib/generated/prisma/enums"
-import { t } from "@/lib/languages/i18n"
+import { tran } from "@/lib/languages/i18n"
 import { cn } from "@/lib/utils"
 import { formatAmount } from "@/utility/transaction"
 import { motion } from "framer-motion"
@@ -82,7 +82,7 @@ export function CashflowChartClient({ data, currency, language }: CashflowChartC
         >
             <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div className="space-y-1">
-                    <h3 className="text-xl font-black tracking-tight">{t("dashboard.cashflow_trend", language)}</h3>
+                    <h3 className="text-xl font-black tracking-tight">{tran("dashboard.cashflow_trend")}</h3>
                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-60">Last 15 Days</p>
                 </div>
 

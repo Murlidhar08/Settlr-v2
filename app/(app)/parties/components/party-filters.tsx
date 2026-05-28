@@ -1,10 +1,9 @@
 "use client"
 
-import { useUserConfig } from "@/components/providers/user-config-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { t } from "@/lib/languages/i18n"
+import { tran } from "@/lib/languages/i18n"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { Eye, EyeOff, Search } from "lucide-react"
@@ -21,7 +20,6 @@ import {
 import { useOptimisticTab } from "./parties-client-wrapper"
 
 export function PartyFilters() {
-    const { language } = useUserConfig()
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -71,7 +69,7 @@ export function PartyFilters() {
                         <div className="relative group">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40 size-4 group-focus-within:text-primary transition-colors" />
                             <Input
-                                placeholder={t("common.search_parties", language)}
+                                placeholder={tran("common.search_parties")}
                                 value={searchValue}
                                 onChange={(e) => setSearchValue(e.target.value)}
                                 className="h-12 rounded-2xl pl-11 bg-muted/30 border-2 border-transparent focus:border-primary/20 focus:bg-background transition-all shadow-sm font-medium"
@@ -119,25 +117,25 @@ export function PartyFilters() {
                             value="customers"
                             className="rounded-xl font-bold uppercase tracking-widest text-[9px] data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all h-10"
                         >
-                            {t("parties.customers", language)}
+                            {tran("parties.customers")}
                         </TabsTrigger>
                         <TabsTrigger
                             value="suppliers"
                             className="rounded-xl font-bold uppercase tracking-widest text-[9px] data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all h-10"
                         >
-                            {t("parties.suppliers", language)}
+                            {tran("parties.suppliers")}
                         </TabsTrigger>
                         <TabsTrigger
                             value="employees"
                             className="rounded-xl font-bold uppercase tracking-widest text-[9px] data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all h-10"
                         >
-                            {t("parties.employees", language)}
+                            {tran("parties.employees")}
                         </TabsTrigger>
                         <TabsTrigger
                             value="other"
                             className="rounded-xl font-bold uppercase tracking-widest text-[9px] data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all h-10"
                         >
-                            {t("parties.other", language)}
+                            {tran("parties.other")}
                         </TabsTrigger>
                     </TabsList>
                 </div>

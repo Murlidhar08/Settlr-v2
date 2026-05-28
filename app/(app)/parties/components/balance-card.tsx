@@ -7,6 +7,7 @@ import { formatAmount } from "@/utility/transaction";
 
 import { PartyType } from "@/lib/generated/prisma/enums";
 import { useParties } from "@/tanstacks/parties";
+import { tran } from "@/lib/languages/i18n";
 
 interface BalanceCardProps {
     partyType: PartyType;
@@ -32,17 +33,17 @@ export default function BalanceCard({ partyType, search, includeInactive, curren
     const isPay = totalAmount < 0;
     const isSettled = totalAmount === 0;
 
-    const label = isSettled ? "Settled"
+    const label = isSettled ? tran("parties.settled")
         : isCollect
-            ? "To Collect"
-            : "To Pay";
+            ? tran("parties.to_collect")
+            : tran("parties.to_pay");
 
     const ArrowIcon = isCollect ? ArrowDown : ArrowUp;
 
     return (
         <section>
             <p className="mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">
-                Total Balance
+                {tran("parties.total_balance")}
             </p>
 
             <motion.div

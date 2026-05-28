@@ -10,6 +10,7 @@ import { useTransactionDetail } from "@/tanstacks/cashbook"
 import { Skeleton } from "@/components/ui/skeleton"
 import { BackHeader } from "@/components/back-header"
 import { use } from "react"
+import { tran } from "@/lib/languages/i18n"
 
 export default function TransactionDetailPage({ params: paramsPromise }: { params: Promise<{ transactionId: string }> }) {
   const params = use(paramsPromise);
@@ -51,7 +52,7 @@ export default function TransactionDetailPage({ params: paramsPromise }: { param
 function TransactionDetailSkeleton() {
     return (
         <div className="min-h-full bg-background relative">
-            <BackHeader title="Transaction Details" />
+            <BackHeader title={tran("transactions.details")} />
             <main className="mx-auto max-w-6xl px-4 pb-32 pt-4 md:px-8 space-y-12">
                 <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12">
                     <div className="lg:col-span-5 space-y-8">

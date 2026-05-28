@@ -5,14 +5,13 @@ import { AccountDetailsSkeleton } from "./components/account-details-skeleton";
 
 export default async function AccountDetailsPage({ params }: { params: Promise<{ accountId: string }> }) {
     const { accountId } = await params;
-    const { currency, language } = await getUserConfig();
+    const { currency } = await getUserConfig();
 
     return (
         <Suspense fallback={<AccountDetailsSkeleton />}>
             <AccountDetailsView
                 accountId={accountId}
                 currency={currency}
-                language={language}
             />
         </Suspense>
     );

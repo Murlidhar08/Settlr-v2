@@ -1,7 +1,7 @@
 "use client"
 
 import { Currency } from "@/lib/generated/prisma/enums"
-import { t } from "@/lib/languages/i18n"
+import { tran } from "@/lib/languages/i18n"
 import { formatAmount } from "@/utility/transaction"
 import { motion } from "framer-motion"
 import { useMemo } from "react"
@@ -42,8 +42,8 @@ export function AccountsDistributionClient({ data, currency, language }: Account
             className="mt-8 rounded-[2.5rem] border border-border/40 bg-card/30 p-8 shadow-sm backdrop-blur-md"
         >
             <div className="mb-6 space-y-1">
-                <h3 className="text-xl font-black tracking-tight">{t("dashboard.balance_overview", language)}</h3>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-60">Distribution across accounts</p>
+                <h3 className="text-xl font-black tracking-tight">{tran("dashboard.balance_overview")}</h3>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground opacity-60">{tran("dashboard.distribution_across")}</p>
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-8">
@@ -59,7 +59,7 @@ export function AccountsDistributionClient({ data, currency, language }: Account
                                 paddingAngle={5}
                                 dataKey="value"
                                 stroke="none"
-                            >
+                             >
                                 {data.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
@@ -73,7 +73,7 @@ export function AccountsDistributionClient({ data, currency, language }: Account
                                             <div className="rounded-xl border border-border/50 bg-background/90 p-3 shadow-xl backdrop-blur-md">
                                                 <p className="text-xs font-black">{entry.name}</p>
                                                 <p className="text-sm font-black text-primary">{formatAmount(entry.value, currency)}</p>
-                                                <p className="text-[10px] font-bold opacity-60">{percentage}% of total</p>
+                                                <p className="text-[10px] font-bold opacity-60">{percentage}% {tran("dashboard.of_total")}</p>
                                             </div>
                                         )
                                     }
@@ -98,7 +98,7 @@ export function AccountsDistributionClient({ data, currency, language }: Account
                         </div>
                     ))}
                     <div className="pt-4 mt-4 border-t border-border/40 flex justify-between">
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-60">Total Balance</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest opacity-60">{tran("dashboard.total_balance")}</span>
                         <span className="text-sm font-black text-primary">{formatAmount(total, currency)}</span>
                     </div>
                 </div>
