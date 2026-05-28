@@ -20,7 +20,8 @@ import {
   PaintbrushIcon,
   Skull,
   Sun,
-  Terminal
+  Terminal,
+  IndianRupee
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -37,7 +38,7 @@ import {
 } from "@/components/ui/select";
 import { signOut, useSession } from "@/lib/auth/auth-client";
 import { envClient } from "@/lib/env.client";
-import { ThemeMode } from "@/lib/generated/prisma/enums";
+import { Currency, ThemeMode } from "@/lib/generated/prisma/enums";
 import { tran } from "@/lib/languages/i18n";
 import { cn } from "@/lib/utils";
 import { getInitials } from "@/utility/commonFunction";
@@ -53,6 +54,7 @@ export default function SettingsPage() {
   const { data: session, isPending } = useSession();
   const { data: versionData } = useAppVersion();
 
+  const [currency, setCurrency] = useState(userConfig.currency);
   const [dateFormat, setDateFormat] = useState(userConfig.dateFormat);
   const [timeFormat, setTimeFormat] = useState(userConfig.timeFormat);
   const [language, setLanguage] = useState(userConfig.language);
@@ -71,6 +73,12 @@ export default function SettingsPage() {
 
   if (isPending)
     return <SettingsSkeleton />;
+
+  const currencyItems: Record<Currency, string> = {
+    USD: "USD ($)",
+    INR: "INR (₹)",
+    EUR: "EUR (€)",
+  };
 
   const dateFormatItems = [
     { label: "DD/MM/YYYY", value: "dd/MM/yyyy" },
@@ -151,6 +159,32 @@ export default function SettingsPage() {
         {/* GENERAL */}
         <motion.div variants={itemVariants}>
           <Section title={tran("settings.general")}>
+            {/* Currency */}
+            <Row icon={IndianRupee} label={tran("settings.currency")}>
+              <Select
+                items={currencyItems}
+                value={currency}
+                onValueChange={(value) => {
+                  if (!value) return
+                  const v = value as Currency
+                  setCurrency(v)
+                  void upsertUserSettings({ currency: v })
+                  toast.success(tran("settings.msg.currency_updated"))
+                }}
+              >
+                <SelectTrigger className="w-[140px] h-10 rounded-xl border-2 font-bold focus:ring-primary/20">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="rounded-2xl shadow-2xl">
+                  {Object.values(Currency).map((currency) => (
+                    <SelectItem key={currency} value={currency} className="rounded-lg font-medium">
+                      {currencyItems[currency]}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Row>
+
             <Row icon={Calendar} label={tran("settings.date_format")}>
               <Select
                 items={dateFormatItems}
