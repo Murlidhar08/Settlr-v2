@@ -54,7 +54,7 @@ export default function CashSummary({
         className={`mt-2 sm:mt-3 text-center text-3xl sm:text-5xl lg:text-6xl font-black tracking-tighter ${isPositive ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
           }`}
       >
-        {symbol}{formatAmount(Math.abs(cashBalance))}
+        {formatAmount(Math.abs(cashBalance))}
       </motion.h2>
 
       <div className="mt-6 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
@@ -68,7 +68,7 @@ export default function CashSummary({
           className="rounded-2xl sm:rounded-[2rem] bg-emerald-50/50 dark:bg-emerald-500/5 p-4 sm:p-6 text-center border border-emerald-100 dark:border-emerald-500/10 shadow-sm"
         >
           <p className="text-lg sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
-            +{symbol}{formatAmount(totalIn)}
+            +{formatAmount(totalIn)}
           </p>
           <span className="text-[9px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-widest opacity-60">{tran("cashbook.total_inflow")}</span>
         </motion.div>
@@ -83,7 +83,7 @@ export default function CashSummary({
           className="rounded-2xl sm:rounded-[2rem] bg-rose-50/50 dark:bg-rose-500/5 p-4 sm:p-6 text-center border border-rose-100 dark:border-rose-500/10 shadow-sm"
         >
           <p className="text-lg sm:text-2xl font-black text-rose-600 dark:text-rose-400 tracking-tight">
-            -{symbol}{formatAmount(totalOut)}
+            -{formatAmount(totalOut)}
           </p>
           <span className="text-[9px] sm:text-xs font-black text-muted-foreground uppercase tracking-widest opacity-60">{tran("cashbook.total_outflow")}</span>
         </motion.div>
