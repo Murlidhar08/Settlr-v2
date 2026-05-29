@@ -10,6 +10,7 @@ import CashFilters from "./components/cash-filters";
 import { CashbookContent } from "./components/cashbook-content";
 import { CashbookSkeleton } from "./components/cashbook-skeleton";
 import { tran } from "@/lib/languages/i18n";
+import { AppHeader } from "@/components/app-header";
 
 interface CashbookPageProps {
   searchParams: Promise<{
@@ -33,6 +34,8 @@ export default async function CashbookPage({ searchParams }: CashbookPageProps) 
 
   return (
     <div className="w-full flex-1 bg-background pb-34">
+      <AppHeader title={tran("cashbook.title")} />
+
       <div className="mx-auto w-full max-w-4xl px-6">
         <CashFilters effectiveStartDate={effectiveStartDate} effectiveEndDate={effectiveEndDate} />
 

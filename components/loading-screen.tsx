@@ -46,7 +46,7 @@ export function LoadingScreen() {
     if (!mounted) return null;
 
     const isDark = resolvedTheme === "dark";
-    const logoSrc = isDark ? "/images/logo/dark_logo.svg" : "/images/logo/light_logo.svg";
+    const logoSrc = isDark ? "/images/logo/dark_logo.png" : "/images/logo/light_logo.png";
 
     const getLogoAnimation = (): TargetAndTransition => {
         switch (variant) {
