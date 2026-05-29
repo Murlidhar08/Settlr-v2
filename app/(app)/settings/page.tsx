@@ -21,7 +21,8 @@ import {
   Skull,
   Sun,
   Terminal,
-  IndianRupee
+  IndianRupee,
+  Trash2Icon
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -172,7 +173,7 @@ export default function SettingsPage() {
                   toast.success(tran("settings.msg.currency_updated"))
                 }}
               >
-                <SelectTrigger className="w-[140px] h-10 rounded-xl border-2 font-bold focus:ring-primary/20">
+                <SelectTrigger className="w-35 h-10 rounded-xl border-2 font-bold focus:ring-primary/20">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl shadow-2xl">
@@ -310,6 +311,17 @@ export default function SettingsPage() {
                 ))}
               </div>
             </Row>
+          </Section>
+        </motion.div>
+
+        {/* DATA MANAGEMENT */}
+        <motion.div variants={itemVariants}>
+          <Section title={tran("settings.data_management")}>
+            <Row
+              icon={Trash2Icon}
+              label={tran("settings.recycle_bin")}
+              href="/settings/recycle-bin"
+            />
           </Section>
         </motion.div>
 
