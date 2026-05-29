@@ -14,5 +14,6 @@
 
 # Add from upstream
 `git fetch upstream`
-`git merge upstream/main --allow-unrelated-histories`
+`git merge upstream/main --allow-unrelated-histories` # Only first time
+`git merge upstream/main` # After first time
 `git push origin main`
