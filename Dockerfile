@@ -27,8 +27,8 @@ FROM base AS builder
 WORKDIR /app
 
 # Environment variables needed for build
-ENV NEXT_PUBLIC_APP_NAME="Next Template"
-ENV NEXT_PUBLIC_APP_DESCRIPTION="This is Next template description"
+ENV NEXT_PUBLIC_APP_NAME="Settlr"
+ENV NEXT_PUBLIC_APP_DESCRIPTION="Next-gen personal finance and expense management platform"
 ENV BETTER_AUTH_URL="http://localhost:3000"
 ENV DATABASE_URL="postgresql://mock:mock@localhost:5432/mock"
 ENV BETTER_AUTH_SECRET="mock_secret_at_least_32_characters_long"
