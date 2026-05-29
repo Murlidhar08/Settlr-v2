@@ -12,19 +12,19 @@ fi
 
 VERSION=$1
 # Update docker username and Project Image
-IMAGE="<YOUR_docker_username>/<PROJECT_IMAGE_NAME>"
+IMAGE="chavda2772/settlr"
 
 echo "🚀 Building Docker image with tag $VERSION..."
 
 docker build -t $IMAGE:$VERSION .
 
-echo "🔖 Tagging image as latest..."
-docker tag $IMAGE:$VERSION $IMAGE:latest
+# echo "🔖 Tagging image as latest..."
+# docker tag $IMAGE:$VERSION $IMAGE:latest
 
 echo "📤 Pushing version tag..."
 docker push $IMAGE:$VERSION
 
-echo "📤 Pushing latest tag..."
-docker push $IMAGE:latest
+# echo "📤 Pushing latest tag..."
+# docker push $IMAGE:latest
 
 echo "✅ Docker image $IMAGE:$VERSION successfully pushed!"

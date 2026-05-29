@@ -23,6 +23,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // User Config
   const userConfig = await getUserConfig() ?? getDefaultConfig()
   const session = await getUserSession();
+  if (!session?.user) {
+    redirect("/login" as any);
+  }
   const status = session.user.status;
 
   // Handle Redirection based on status

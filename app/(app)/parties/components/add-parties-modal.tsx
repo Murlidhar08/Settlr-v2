@@ -163,7 +163,7 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
                   placeholder={tran("parties.reliance_placeholder")}
                   value={data.name}
                   onChange={(e) =>
-                    setData((pre) => ({ ...pre, name: e.target.value }))
+                    setData((pre: PartyInput) => ({ ...pre, name: e.target.value }))
                   }
                   className="h-14 rounded-2xl border-2 bg-transparent px-4 text-base font-bold shadow-sm outline-none focus:border-primary transition-all"
                   autoFocus
@@ -179,7 +179,7 @@ const AddPartiesModal = ({ title, type, children }: PartiesProps) => {
                   inputMode="numeric"
                   value={data.contactNo ?? ""}
                   onChange={(e) =>
-                    setData((pre) => ({
+                    setData((pre: PartyInput) => ({
                       ...pre,
                       contactNo: e.target.value || null,
                     }))

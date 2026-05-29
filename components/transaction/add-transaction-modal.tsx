@@ -522,7 +522,6 @@ export const AddTransactionModal = ({
                             setDateOpen(false)
                           }
                         }}
-                        initialFocus
                       />
                     </PopoverContent>
                   </Popover>

@@ -13,7 +13,7 @@ import { prisma } from "../prisma/prisma";
 // Template
 import { headers } from "next/headers";
 import { envServer } from "../env.server";
-import { CategoryType, Currency, FinancialAccountType, MoneyType, ThemeMode } from "../generated/prisma/enums";
+import { CategoryType, Currency, FinancialAccountType, MoneyType, ThemeMode, UserStatus } from "../generated/prisma/enums";
 import { getDeleteAccountEmailHtml } from "../templates/email-delete-account";
 import { getPasswordResetSuccessEmailHtml } from "../templates/email-password-reseted";
 import { getResetPasswordEmailHtml } from "../templates/email-reset-password";
@@ -45,6 +45,10 @@ export const auth = betterAuth({
         required: false
       },
       activeBusinessId: {
+        type: "string",
+        required: false
+      },
+      status: {
         type: "string",
         required: false
       }
@@ -211,6 +215,7 @@ export const auth = betterAuth({
           role: true,
           banned: true,
           banReason: true,
+          status: true,
 
           // current session context
           sessions: {
@@ -288,6 +293,7 @@ export const auth = betterAuth({
           twoFactorEnabled: dbUser?.twoFactorEnabled ?? false,
           banned: dbUser?.banned ?? false,
           banReason: dbUser?.banReason ?? null,
+          status: dbUser?.status ?? UserStatus.pendingapproval,
         },
       }
     }),
