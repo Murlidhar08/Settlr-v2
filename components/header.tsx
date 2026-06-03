@@ -30,7 +30,7 @@ const Header = ({ title, isProfile }: HeaderProps) => {
     >
       <div className="w-1/4 sm:w-1/3 flex items-center gap-2">
         <Link href="/" className="lg:hidden">
-          <div className="h-9 w-9 shrink-0 flex items-center justify-center relative rounded-xl bg-accent/50 border border-border/50">
+          <div className="h-9 w-9 shrink-0 flex items-center justify-center relative rounded-xl bg-accent/10 border border-border/50">
             <Image src="/images/logo/light_logo.png" alt="Logo" width={22} height={22} className="dark:hidden" />
             <Image src="/images/logo/dark_logo.png" alt="Logo" width={22} height={22} className="hidden dark:block" />
           </div>
