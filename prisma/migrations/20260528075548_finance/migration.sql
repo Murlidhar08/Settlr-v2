@@ -5,9 +5,6 @@
 
 */
 -- CreateEnum
-CREATE TYPE "Currency" AS ENUM ('INR', 'USD', 'EUR');
-
--- CreateEnum
 CREATE TYPE "FinancialAccountType" AS ENUM ('MONEY', 'PARTY', 'CATEGORY');
 
 -- CreateEnum
@@ -23,9 +20,6 @@ CREATE TYPE "CategoryType" AS ENUM ('INCOME', 'EXPENSE', 'ASSET', 'EQUITY', 'ADJ
 ALTER TABLE "user" ADD COLUMN     "activeBusinessId" TEXT,
 ALTER COLUMN "role" SET NOT NULL,
 ALTER COLUMN "role" SET DEFAULT 'user';
-
--- AlterTable
-ALTER TABLE "userSettings" ADD COLUMN     "currency" "Currency" NOT NULL DEFAULT 'INR';
 
 -- CreateTable
 CREATE TABLE "business" (
