@@ -22,6 +22,7 @@ export default {
         title: "Settings",
         general: "General Preferences",
         currency: "Currency",
+        locale: "Locale",
         date_format: "Date Format",
         time_format: "Time Format",
         language: "Language",
@@ -42,6 +43,7 @@ export default {
         dark: "Dark",
         msg: {
             currency_updated: "Currency updated successfully",
+            locale_updated: "Locale updated successfully",
             date_format_updated: "Date format updated",
             time_format_updated: "Time format updated",
             language_updated: "Language updated",

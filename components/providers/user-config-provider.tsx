@@ -2,7 +2,7 @@
 
 import { Currency, ThemeMode } from "@/lib/generated/prisma/enums"
 import { setActiveLanguage } from "@/lib/languages/i18n"
-import { setGlobalUserConfig } from "@/utility/dateTimeFn"
+import { setGlobalUserConfig } from "@/utility/global-user-config"
 import { useTheme } from "next-themes"
 import { createContext, useContext, useEffect, useState } from "react"
 
@@ -12,6 +12,7 @@ interface userSettings {
   timeFormat: string,
   language: string,
   theme: ThemeMode,
+  locale: string
   defAccId?: string | null,
   defIncomeAccId?: string | null,
   defExpenseAccId?: string | null,
@@ -46,7 +47,7 @@ export function UserConfigProvider({ config, children }: { config: Omit<userSett
   useEffect(() => {
     setActiveLanguage(config.language)
     setGlobalUserConfig(config)
-  }, [config.language, config.dateFormat, config.timeFormat])
+  }, [config.language, config.locale, config.dateFormat, config.timeFormat])
 
   useEffect(() => {
     if (theme) {

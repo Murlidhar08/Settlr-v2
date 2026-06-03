@@ -22,6 +22,7 @@ export default {
         title: "सेटिंग्स",
         general: "सामान्य प्राथमिकताएं",
         currency: "मुद्रा",
+        locale: "क्षेत्र",
         date_format: "दिनांक प्रारूप",
         time_format: "समय प्रारूप",
         language: "भाषा",
@@ -42,6 +43,7 @@ export default {
         dark: "डार्क",
         msg: {
             currency_updated: "मुद्रा सफलतापूर्वक अपडेट की गई",
+            locale_updated: "क्षेत्र सफलतापूर्वक अपडेट किया गया",
             date_format_updated: "दिनांक प्रारूप अपडेट किया गया",
             time_format_updated: "समय प्रारूप अपडेट किया गया",
             language_updated: "भाषा अपडेट की गई",

@@ -12,6 +12,7 @@ export const getUserConfig = async () => {
 export function getDefaultConfig() {
   return {
     currency: Currency.INR,
+    locale: "en-IN",
     dateFormat: "dd/MM/yyyy",
     timeFormat: "hh:mm a",
     language: "en",

@@ -10,6 +10,8 @@ import {
   Calendar,
   ChevronRight,
   Clock,
+  Globe,
+  IndianRupee,
   KeyRoundIcon,
   Languages,
   Laptop,
@@ -21,7 +23,6 @@ import {
   Skull,
   Sun,
   Terminal,
-  IndianRupee,
   Trash2Icon
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -42,7 +43,7 @@ import { envClient } from "@/lib/env.client";
 import { Currency, ThemeMode } from "@/lib/generated/prisma/enums";
 import { tran } from "@/lib/languages/i18n";
 import { cn } from "@/lib/utils";
-import { getInitials } from "@/utility/commonFunction";
+import { getInitials } from "@/utility/common-function";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
@@ -56,6 +57,7 @@ export default function SettingsPage() {
   const { data: versionData } = useAppVersion();
 
   const [currency, setCurrency] = useState(userConfig.currency);
+  const [locale, setLocale] = useState(userConfig.locale);
   const [dateFormat, setDateFormat] = useState(userConfig.dateFormat);
   const [timeFormat, setTimeFormat] = useState(userConfig.timeFormat);
   const [language, setLanguage] = useState(userConfig.language);
@@ -79,6 +81,12 @@ export default function SettingsPage() {
     USD: "USD ($)",
     INR: "INR (₹)",
     EUR: "EUR (€)",
+  };
+
+  const localeItems: Record<string, string> = {
+    "en-US": "English (US)",
+    "en-IN": "English (India)",
+    "de-DE": "German (Germany)",
   };
 
   const dateFormatItems = [
@@ -186,6 +194,32 @@ export default function SettingsPage() {
               </Select>
             </Row>
 
+            {/* Locale */}
+            <Row icon={Globe} label={tran("settings.locale")}>
+              <Select
+                items={localeItems}
+                value={locale}
+                onValueChange={(value) => {
+                  if (!value) return
+                  const v = value as string
+                  setLocale(v)
+                  void upsertUserSettings({ locale: v })
+                  toast.success(tran("settings.msg.locale_updated"))
+                }}
+              >
+                <SelectTrigger className="w-35 h-10 rounded-xl border-2 font-bold focus:ring-primary/20">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="rounded-2xl shadow-2xl">
+                  {Object.entries(localeItems).map(([key, value]) => (
+                    <SelectItem key={key} value={key} className="rounded-lg font-medium">
+                      {value}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Row>
+
             <Row icon={Calendar} label={tran("settings.date_format")}>
               <Select
                 items={dateFormatItems}
@@ -278,11 +312,11 @@ export default function SettingsPage() {
                 </Button>
               </Row>
             )}
-          </Section>
-        </motion.div>
+          </Section >
+        </motion.div >
 
         {/* APPEARANCE */}
-        <motion.div variants={itemVariants}>
+        < motion.div variants={itemVariants} >
           <Section title={tran("settings.appearance")}>
             <Row icon={PaintbrushIcon} label={tran("settings.theme_mode")}>
               <div className="flex gap-1 bg-muted/50 rounded-2xl p-1.5 border-2 border-transparent focus-within:border-primary/10">
@@ -312,10 +346,10 @@ export default function SettingsPage() {
               </div>
             </Row>
           </Section>
-        </motion.div>
+        </motion.div >
 
         {/* DATA MANAGEMENT */}
-        <motion.div variants={itemVariants}>
+        < motion.div variants={itemVariants} >
           <Section title={tran("settings.data_management")}>
             <Row
               icon={Trash2Icon}
@@ -323,10 +357,10 @@ export default function SettingsPage() {
               href="/settings/recycle-bin"
             />
           </Section>
-        </motion.div>
+        </motion.div >
 
         {/* SECURITY */}
-        <motion.div variants={itemVariants}>
+        < motion.div variants={itemVariants} >
           <Section title={tran("settings.security_privacy")}>
             <Row
               icon={Link2Icon}
@@ -351,7 +385,7 @@ export default function SettingsPage() {
               href="/settings/danger"
             />
           </Section>
-        </motion.div>
+        </motion.div >
 
         <FooterButtons>
           <Button onClick={handleLogout} variant="destructive" className="h-14 w-14 md:w-auto md:px-12 rounded-full md:gap-3 font-semibold uppercase bg-rose-500 hover:bg-rose-500/70 text-white shadow-lg shadow-rose-500/50 transition-all hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 p-0 md:py-2">
@@ -370,7 +404,7 @@ export default function SettingsPage() {
           <p className="text-[10px] font-black uppercase tracking-[0.3em]">Build Version {version}</p>
           <p className="text-[9px] font-medium italic">© {new Date().getFullYear()} {envClient.NEXT_PUBLIC_APP_NAME}. All rights reserved.</p>
         </motion.div>
-      </motion.div>
+      </motion.div >
     </div >
   );
 }
