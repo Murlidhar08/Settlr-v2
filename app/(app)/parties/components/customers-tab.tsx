@@ -26,7 +26,6 @@ export default async function CustomersTab({ partyType, search, includeInactive 
           partyType={partyType}
           search={search}
           includeInactive={includeInactive}
-          currency={currency}
           period={period}
         />
       </Suspense>

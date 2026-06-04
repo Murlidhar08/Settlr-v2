@@ -33,7 +33,7 @@ export default function SummaryCard({ currency, language }: SummaryStatsProps) {
           <div className="space-y-1">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">{tran("dashboard.total_balance")}</p>
             <p className="text-2xl font-black tracking-tighter sm:text-4xl leading-none">
-              <CountUp value={liquidCash} currency={currency} isLoading={isPending} />
+              <CountUp value={liquidCash} isLoading={isPending} />
             </p>
           </div>
           <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-xl border border-white/20 shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
@@ -45,7 +45,7 @@ export default function SummaryCard({ currency, language }: SummaryStatsProps) {
           <div className="px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
             <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest mr-2">Net Worth</span>
             <span className="text-xs font-black text-white leading-none">
-              <CountUp value={netWorth} currency={currency} isLoading={isPending} />
+              <CountUp value={netWorth} isLoading={isPending} />
             </span>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function SummaryCard({ currency, language }: SummaryStatsProps) {
           <div className="space-y-1">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/50">{tran("dashboard.cash_flow")}</p>
             <p className="text-2xl font-black tracking-tighter sm:text-4xl text-white leading-none">
-              <CountUp value={todayNetCash} currency={currency} isLoading={isPending} />
+              <CountUp value={todayNetCash} isLoading={isPending} />
             </p>
           </div>
           <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-white/5 flex items-center justify-center backdrop-blur-md border border-white/10 shadow-inner group-hover:scale-110 transition-all duration-500">
@@ -90,7 +90,7 @@ export default function SummaryCard({ currency, language }: SummaryStatsProps) {
       {/* Receivable */}
       <StatusCard
         title={tran("dashboard.receivables")}
-        amount={<CountUp value={Math.abs(receivable)} currency={currency} isLoading={isPending} />}
+        amount={<CountUp value={Math.abs(receivable)} isLoading={isPending} />}
         subtitle={tran("dashboard.you_get")}
         icon={<MoveDownLeft />}
         positive
@@ -100,7 +100,7 @@ export default function SummaryCard({ currency, language }: SummaryStatsProps) {
       {/* Payable */}
       <StatusCard
         title={tran("dashboard.payables")}
-        amount={<CountUp value={Math.abs(payable)} currency={currency} isLoading={isPending} />}
+        amount={<CountUp value={Math.abs(payable)} isLoading={isPending} />}
         subtitle={tran("dashboard.you_give")}
         icon={<MoveUpRight />}
         positive={false}

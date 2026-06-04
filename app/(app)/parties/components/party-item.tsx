@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
 import { cn } from "@/lib/utils";
-import { getInitials } from "@/utility/commonFunction";
+import { getInitials } from "@/utility/common-function";
 import { formatAmount } from "@/utility/transaction";
 
 const getRandomAvatarColor = () => {
@@ -89,7 +89,7 @@ const PartyItem = ({
                 : "text-rose-600 dark:text-rose-400"
               }`}
           >
-            {formatAmount(amount, currency)}
+            {formatAmount(amount)}
           </p>
 
           <span

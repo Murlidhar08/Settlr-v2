@@ -89,7 +89,7 @@ export function DashboardTransactionItem({
                 ? "text-emerald-600 dark:text-emerald-400"
                 : "text-rose-600 dark:text-rose-400"
           )}>
-            {isNeutral ? "" : isIn ? "+" : "-"}{formatAmount(Number(amount), currency as any, false)}
+            {isNeutral ? "" : isIn ? "+" : "-"}{formatAmount(Number(amount), false)}
           </p>
         </div>
       </Link>

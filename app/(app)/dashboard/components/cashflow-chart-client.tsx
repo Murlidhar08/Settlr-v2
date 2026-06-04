@@ -45,14 +45,14 @@ const CustomTooltip = ({ active, payload, label, currency }: {
                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                             Inflow
                         </span>
-                        <span className="text-xs font-black">{formatAmount(payload[0].value || 0, currency)}</span>
+                        <span className="text-xs font-black">{formatAmount(payload[0].value || 0)}</span>
                     </div>
                     <div className="flex items-center justify-between gap-8">
                         <span className="flex items-center gap-2 text-xs font-bold text-rose-500">
                             <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
                             Outflow
                         </span>
-                        <span className="text-xs font-black">{formatAmount(payload[1].value || 0, currency)}</span>
+                        <span className="text-xs font-black">{formatAmount(payload[1].value || 0)}</span>
                     </div>
                     <div className="my-2 h-px bg-border/40" />
                     <div className="flex items-center justify-between gap-8">
@@ -61,7 +61,7 @@ const CustomTooltip = ({ active, payload, label, currency }: {
                             "text-sm font-black",
                             (payload[2]?.value || 0) >= 0 ? "text-primary" : "text-rose-500"
                         )}>
-                            {formatAmount(payload[2]?.value || 0, currency)}
+                            {formatAmount(payload[2]?.value || 0)}
                         </span>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ export function CashflowChartClient({ data, currency, language }: CashflowChartC
                 </div>
             </div>
 
-            <div className="h-[300px] w-full">
+            <div className="h-75 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                         <defs>

@@ -1,21 +1,18 @@
 "use client"
 
-import { Currency } from "@/lib/generated/prisma/enums";
-import { formatAmount, getCurrencySymbol } from "@/utility/transaction";
+import { formatAmount } from "@/utility/transaction";
 import { motion } from "framer-motion";
 import { tran } from "@/lib/languages/i18n";
 
 interface CashSummaryProp {
   totalIn: number
   totalOut: number
-  currency?: Currency
   isLoading?: boolean
 }
 
 export default function CashSummary({
   totalIn,
   totalOut,
-  currency = Currency.INR,
   isLoading,
 }: CashSummaryProp) {
   if (isLoading) {
@@ -34,8 +31,6 @@ export default function CashSummary({
   const cashBalance = totalIn - totalOut
   const isPositive = cashBalance >= 0
 
-  const symbol = getCurrencySymbol(currency)
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -51,8 +46,7 @@ export default function CashSummary({
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-        className={`mt-2 sm:mt-3 text-center text-3xl sm:text-5xl lg:text-6xl font-black tracking-tighter ${isPositive ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
-          }`}
+        className={`mt-2 sm:mt-3 text-center text-3xl sm:text-5xl lg:text-6xl font-black tracking-tighter ${isPositive ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
       >
         {formatAmount(Math.abs(cashBalance))}
       </motion.h2>

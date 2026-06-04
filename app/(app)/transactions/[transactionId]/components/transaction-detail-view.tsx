@@ -22,10 +22,9 @@ import { tran } from "@/lib/languages/i18n"
 interface TransactionDetailViewProps {
     transaction: any
     isIn: boolean
-    currency?: Currency
 }
 
-export function TransactionDetailView({ transaction, isIn, currency = Currency.INR }: TransactionDetailViewProps) {
+export function TransactionDetailView({ transaction, isIn }: TransactionDetailViewProps) {
     const { currency: configCurrency, dateFormat, timeFormat } = useUserConfig()
     const confirm = useConfirm()
     const router = useRouter()
@@ -163,7 +162,7 @@ export function TransactionDetailView({ transaction, isIn, currency = Currency.I
                                     "text-4xl sm:text-5xl font-black tracking-tighter tabular-nums",
                                     isIn ? "text-emerald-600" : "text-rose-600"
                                 )}>
-                                    {formatAmount(transaction.amount, configCurrency, true, isIn ? 'IN' : 'OUT')}
+                                    {formatAmount(transaction.amount, true, isIn ? 'IN' : 'OUT')}
                                 </p>
 
                                 <div className="pt-2 flex justify-center lg:justify-start">
@@ -327,7 +326,7 @@ function Divider() {
 
 function AccountNode({ account, label, isSource, side }: { account: any, label: string, isSource: boolean, side: 'left' | 'right' }) {
     return (
-        <div className="flex flex-col items-center text-center space-y-2 flex-1 px-2 max-w-[180px]">
+        <div className="flex flex-col items-center text-center space-y-2 flex-1 px-2 max-w-45">
             <span className="text-[9px] font-black uppercase tracking-[0.3em] text-muted-foreground/30 leading-none">{label}</span>
             <div className={cn(
                 "relative p-3 rounded-2xl w-full flex items-center justify-center shadow-md border-2 transition-all",
@@ -338,7 +337,7 @@ function AccountNode({ account, label, isSource, side }: { account: any, label: 
                 <div className="flex flex-col items-center gap-1 overflow-hidden">
                     <span className="font-black text-[13px] tracking-tighter text-foreground truncate w-full px-1">{account.name}</span>
                     <div className="px-1.5 py-0.5 rounded-full bg-muted/40 border border-border/10">
-                        <span className="text-[7.5px] font-black uppercase tracking-widest text-muted-foreground/60 block truncate max-w-[80px]">
+                        <span className="text-[7.5px] font-black uppercase tracking-widest text-muted-foreground/60 block truncate max-w-20">
                             {account.categoryType || account.moneyType || account.type}
                         </span>
                     </div>

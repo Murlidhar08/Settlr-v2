@@ -1,25 +1,20 @@
 "use client";
 
 import { ArrowDown, ArrowUp, ChevronRight } from "lucide-react";
-
-import { Currency } from "@/lib/generated/prisma/enums";
 import { formatAmount } from "@/utility/transaction";
-
 import { PartyType } from "@/lib/generated/prisma/enums";
 import { useParties } from "@/tanstacks/parties";
 import { tran } from "@/lib/languages/i18n";
+import { motion } from "framer-motion";
 
 interface BalanceCardProps {
     partyType: PartyType;
     search?: string;
     includeInactive?: boolean;
-    currency: Currency;
     period?: 'month' | 'year' | 'all';
 }
 
-import { motion } from "framer-motion";
-
-export default function BalanceCard({ partyType, search, includeInactive, currency, period = 'all' }: BalanceCardProps) {
+export default function BalanceCard({ partyType, search, includeInactive, period = 'all' }: BalanceCardProps) {
     const { data: parties, isLoading } = useParties(partyType, search, includeInactive, period);
 
     if (isLoading || !parties) {
@@ -79,7 +74,7 @@ export default function BalanceCard({ partyType, search, includeInactive, curren
                                 ? "text-rose-700"
                                 : "text-muted-foreground"
                             }`}>
-                            {formatAmount(Math.abs(totalAmount), currency)}
+                            {formatAmount(Math.abs(totalAmount))}
                         </p>
                     </div>
                 </div>

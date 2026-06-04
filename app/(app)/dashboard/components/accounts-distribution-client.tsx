@@ -47,7 +47,7 @@ export function AccountsDistributionClient({ data, currency, language }: Account
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="h-[250px] w-full md:w-1/2">
+                <div className="h-62.5 w-full md:w-1/2">
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                             <Pie
@@ -59,7 +59,7 @@ export function AccountsDistributionClient({ data, currency, language }: Account
                                 paddingAngle={5}
                                 dataKey="value"
                                 stroke="none"
-                             >
+                            >
                                 {data.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
@@ -72,7 +72,7 @@ export function AccountsDistributionClient({ data, currency, language }: Account
                                         return (
                                             <div className="rounded-xl border border-border/50 bg-background/90 p-3 shadow-xl backdrop-blur-md">
                                                 <p className="text-xs font-black">{entry.name}</p>
-                                                <p className="text-sm font-black text-primary">{formatAmount(entry.value, currency)}</p>
+                                                <p className="text-sm font-black text-primary">{formatAmount(entry.value)}</p>
                                                 <p className="text-[10px] font-bold opacity-60">{percentage}% {tran("dashboard.of_total")}</p>
                                             </div>
                                         )
@@ -94,12 +94,12 @@ export function AccountsDistributionClient({ data, currency, language }: Account
                                 />
                                 <span className="text-xs font-bold opacity-80">{item.name}</span>
                             </div>
-                            <span className="text-xs font-black">{formatAmount(item.value, currency)}</span>
+                            <span className="text-xs font-black">{formatAmount(item.value)}</span>
                         </div>
                     ))}
                     <div className="pt-4 mt-4 border-t border-border/40 flex justify-between">
                         <span className="text-[10px] font-black uppercase tracking-widest opacity-60">{tran("dashboard.total_balance")}</span>
-                        <span className="text-sm font-black text-primary">{formatAmount(total, currency)}</span>
+                        <span className="text-sm font-black text-primary">{formatAmount(total)}</span>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button"
 import { CategoryType, Currency, FinancialAccountType, MoneyType, PartyType } from "@/lib/generated/prisma/enums"
 import { cn } from "@/lib/utils"
 import { TransactionDirection } from "@/types/transaction/TransactionDirection"
-import { formatAmount } from "@/utility/commonFunction"
 import { getCurrencySymbol } from "@/utility/transaction"
 import { motion } from "framer-motion"
 import {
@@ -46,6 +45,7 @@ import {
 
 import { useAccountStats, useAccountTransactions } from "@/tanstacks/financial-account"
 import { AccountDetailsSkeleton } from "./account-details-skeleton"
+import { formatAmount } from "@/utility/currency-fn"
 
 interface AccountDetailsViewProps {
     accountId: string
@@ -288,7 +288,7 @@ export function AccountDetailsView({ accountId, currency }: AccountDetailsViewPr
                                 <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground/70">{tran("accounts.statement_ledger")}</h2>
 
                                 <Select value={period} onValueChange={handlePeriodChange}>
-                                    <SelectTrigger className="h-7 px-3 rounded-full bg-muted/50 text-[9px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-[110px]">
+                                    <SelectTrigger className="h-7 px-3 rounded-full bg-muted/50 text-[9px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-27.5">
                                         <SelectValue placeholder="Period" />
                                     </SelectTrigger>
                                     <SelectContent className="rounded-2xl border-muted/20 shadow-xl">

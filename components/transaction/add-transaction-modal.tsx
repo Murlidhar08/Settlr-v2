@@ -30,6 +30,7 @@ import { getFinancialAccounts } from "@/actions/financial-account.actions"
 import { ModalMode } from "@/types/transaction/ModalMode"
 import { TransactionDirection } from "@/types/transaction/TransactionDirection"
 import { useUserConfig } from "../providers/user-config-provider"
+import { getCurrencySymbol } from "@/utility/transaction"
 
 interface TransactionProps {
   title: string
@@ -71,6 +72,7 @@ export const AddTransactionModal = ({
   const [dateOpen, setDateOpen] = useState(false)
   const [currentDirection, setCurrentDirection] = useState<TransactionDirection>(direction || TransactionDirection.OUT)
   const isOut = currentDirection === TransactionDirection.OUT;
+  const userConfig = useUserConfig()
 
   // TanStack Query for accounts
   const { data: allAccounts = EMPTY_ACCOUNTS, isLoading: loadingAccounts } = useQuery({
@@ -100,11 +102,11 @@ export const AddTransactionModal = ({
   const [mode, setMode] = useState<ModalMode>(ModalMode.CASHBOOK)
 
   const lastInitializedRef = useRef<string>("")
- 
+
   useEffect(() => {
     if (open && !loadingAccounts && allAccounts.length > 0) {
       const initializationKey = `${currentDirection}-${transactionData?.id}-${accountId}-${partyId}`
- 
+
       if (lastInitializedRef.current !== initializationKey) {
         if (transactionData) {
           setData((pre: any) => ({
@@ -114,7 +116,7 @@ export const AddTransactionModal = ({
             date: format(transactionData?.date ? new Date(transactionData.date) : new Date(), "yyyy-MM-dd"),
             time: format(transactionData?.date ? new Date(transactionData.date) : new Date(), "HH:mm"),
           }))
- 
+
           const from = allAccounts.find(a => a.id === transactionData.fromAccountId)
           if (from?.type === FinancialAccountType.MONEY) {
             setMoneyAccountId(from.id)
@@ -127,15 +129,15 @@ export const AddTransactionModal = ({
           let inferredMode: ModalMode = ModalMode.CASHBOOK
           let initialMoneyAcc = ""
           let initialPartnerAcc = ""
- 
+
           const currentAcc = allAccounts.find(a => a.id === accountId)
           const partyAcc = partyId ? allAccounts.find(a => a.partyId === partyId) : null
- 
+
           if (partyId || (currentAcc && currentAcc.type === FinancialAccountType.PARTY)) {
             inferredMode = ModalMode.PARTY
             const partyAccount = partyAcc || currentAcc
             initialPartnerAcc = partyAccount?.id || ""
-            
+
             // USE DEFAULT MONEY ACCOUNT FOR PARTIES TOO
             initialMoneyAcc = defAccId || allAccounts.find(a => a.type === FinancialAccountType.MONEY)?.id || ""
           } else if (currentAcc && currentAcc.type === FinancialAccountType.MONEY) {
@@ -145,16 +147,16 @@ export const AddTransactionModal = ({
           } else {
             inferredMode = ModalMode.CASHBOOK
             const moneyAccs = allAccounts.filter(a => a.type === FinancialAccountType.MONEY)
-            
+
             // USE DEFAULT MONEY ACCOUNT
             initialMoneyAcc = defAccId || moneyAccs[0]?.id || ""
-            
+
             // USE DEFAULT CATEGORY ACCOUNTS
             const defaultCatAccId = isOut ? defExpenseAccId : defIncomeAccId;
             const targetCat = isOut ? CategoryType.EXPENSE : CategoryType.INCOME
             initialPartnerAcc = defaultCatAccId || allAccounts.find(a => a.type === FinancialAccountType.CATEGORY && a.categoryType === targetCat)?.id || ""
           }
- 
+
           setMode(inferredMode)
           setMoneyAccountId(initialMoneyAcc)
           setPartnerAccountId(initialPartnerAcc)
@@ -419,7 +421,7 @@ export const AddTransactionModal = ({
 
           <div className="flex-1 overflow-y-auto custom-scrollbar">
             {/* Money In/Out Toggle */}
-            <div className="bg-muted/50 p-1 mx-6 rounded-[20px] flex items-center shadow-inner border border-muted-foreground/5">
+            <div className="bg-muted/50 p-1 mx-6 rounded-4xl flex items-center shadow-inner border border-muted-foreground/5">
               <button
                 onClick={() => setCurrentDirection(TransactionDirection.IN)}
                 className={cn(
@@ -465,7 +467,7 @@ export const AddTransactionModal = ({
                   "relative flex items-center justify-center transition-all duration-300",
                   isOut ? "text-rose-600" : "text-emerald-600"
                 )}>
-                  <span className="text-4xl font-black mr-2 opacity-50">₹</span>
+                  <span className="text-4xl font-black mr-2 opacity-50">{getCurrencySymbol(userConfig.currency)}</span>
                   <input
                     value={(() => {
                       if (!data.amount) return "";
@@ -561,7 +563,7 @@ export const AddTransactionModal = ({
                             {allAccounts.find(a => a.id === moneyAccountId)?.name}
                           </SelectValue>
                         </SelectTrigger>
-                        <SelectContent className="rounded-2xl shadow-xl max-h-[300px]">
+                        <SelectContent className="rounded-2xl shadow-xl max-h-75">
                           {moneyAccounts.map(acc => (
                             <SelectItem key={acc.id} value={acc.id} className="py-2 px-4 focus:bg-primary/90 rounded-xl cursor-pointer">
                               <div className="flex justify-between items-center w-full gap-4">
@@ -589,7 +591,7 @@ export const AddTransactionModal = ({
                             {allAccounts.find(a => a.id === partnerAccountId)?.name}
                           </SelectValue>
                         </SelectTrigger>
-                        <SelectContent className="rounded-2xl shadow-xl max-h-[300px]">
+                        <SelectContent className="rounded-2xl shadow-xl max-h-75">
                           {partnerOptions.map(acc => (
                             <SelectItem key={acc.id} value={acc.id} className="py-2 px-4 focus:bg-primary/90 rounded-xl cursor-pointer">
                               <div className="flex flex-col">
@@ -616,7 +618,7 @@ export const AddTransactionModal = ({
                   placeholder="What is this for?"
                   value={data.description}
                   onChange={(e) => setData({ ...data, description: e.target.value })}
-                  className="min-h-[100px] rounded-2xl border-2 p-4 text-base font-medium transition-all focus:border-primary focus:ring-0"
+                  className="min-h-25 rounded-2xl border-2 p-4 text-base font-medium transition-all focus:border-primary focus:ring-0"
                 />
               </motion.div>
             </motion.div>

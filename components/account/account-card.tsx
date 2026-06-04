@@ -4,7 +4,6 @@ import { FinancialAccount } from "@/lib/generated/prisma/client"
 import { CategoryType, Currency, FinancialAccountType, MoneyType } from "@/lib/generated/prisma/enums"
 import { cn } from "@/lib/utils"
 import { useFinancialAccountBalance } from "@/tanstacks/financial-account"
-import { formatAmount } from "@/utility/commonFunction"
 import { getCurrencySymbol } from "@/utility/transaction"
 import { motion } from "framer-motion"
 import {
@@ -23,6 +22,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation"
 import { useUserConfig } from "../providers/user-config-provider"
 import { AddAccountModal } from "./add-account-modal"
+import { formatAmount } from "@/utility/currency-fn"
 
 interface AccountCardProps {
     account: FinancialAccount

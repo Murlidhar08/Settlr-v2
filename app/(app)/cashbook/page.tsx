@@ -1,7 +1,6 @@
 import { FooterButtons } from "@/components/footer-buttons";
 import { AddTransactionModal } from "@/components/transaction/add-transaction-modal";
 import { Button } from "@/components/ui/button";
-import { getDefaultConfig, getUserConfig } from "@/lib/user-config";
 import { TransactionDirection } from "@/types/transaction/TransactionDirection";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
@@ -23,9 +22,6 @@ interface CashbookPageProps {
 
 export default async function CashbookPage({ searchParams }: CashbookPageProps) {
   const params = await searchParams;
-  let userConfig = await getUserConfig();
-  userConfig = userConfig ?? getDefaultConfig();
-
   const today = format(new Date(), "yyyy-MM-dd");
 
   const isSearchActive = !!params.search;
@@ -48,7 +44,6 @@ export default async function CashbookPage({ searchParams }: CashbookPageProps) 
             category={params.category}
             startDate={effectiveStartDate}
             endDate={effectiveEndDate}
-            currency={userConfig.currency}
           />
         </Suspense>
       </div>

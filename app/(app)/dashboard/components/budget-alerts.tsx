@@ -32,7 +32,7 @@ export function BudgetAlerts({ currency }: BudgetAlertsProps) {
                         <span className="text-[10px] font-black uppercase tracking-widest">{tran("dashboard.spending_insight")}</span>
                     </div>
                     <p className="text-sm font-medium leading-relaxed">
-                        {tran("dashboard.highest_expense_msg", { name: topExpense[0], amount: formatAmount(topExpense[1], currency) })}
+                        {tran("dashboard.highest_expense_msg", { name: topExpense[0], amount: formatAmount(topExpense[1]) })}
                     </p>
                 </div>
             )}
@@ -46,16 +46,16 @@ export function BudgetAlerts({ currency }: BudgetAlertsProps) {
                 <div className="space-y-2">
                     <div className="flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">{tran("dashboard.monthly_inflow")}</span>
-                        <span className="text-xs font-bold text-emerald-600">+{formatAmount(totalIncome, currency)}</span>
+                        <span className="text-xs font-bold text-emerald-600">+{formatAmount(totalIncome)}</span>
                     </div>
                     <div className="flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">{tran("dashboard.monthly_outflow")}</span>
-                        <span className="text-xs font-bold text-rose-600">-{formatAmount(totalExpense, currency)}</span>
+                        <span className="text-xs font-bold text-rose-600">-{formatAmount(totalExpense)}</span>
                     </div>
                     <div className="pt-2 mt-2 border-t border-indigo-100/50 dark:border-indigo-500/10 flex items-center justify-between">
                         <span className="text-xs font-black uppercase tracking-widest opacity-60">{tran("dashboard.balance")}</span>
                         <span className={`text-sm font-black ${totalIncome >= totalExpense ? 'text-indigo-600' : 'text-rose-600'}`}>
-                            {totalIncome >= totalExpense ? '+' : ''}{formatAmount(totalIncome - totalExpense, currency)}
+                            {totalIncome >= totalExpense ? '+' : ''}{formatAmount(totalIncome - totalExpense)}
                         </span>
                     </div>
                 </div>
