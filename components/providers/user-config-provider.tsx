@@ -16,7 +16,8 @@ interface userSettings {
   defAccId?: string | null,
   defIncomeAccId?: string | null,
   defExpenseAccId?: string | null,
-  setTheme: (theme: ThemeMode) => void,
+  setTheme: (theme: ThemeMode) => void
+  updateConfig: (updates: Partial<Omit<userSettings, 'setTheme' | 'updateConfig'>>) => void
 }
 
 const UserConfigContext = createContext<userSettings | null>(null)
@@ -30,24 +31,26 @@ export const useUserConfig = () => {
 }
 
 
-export function UserConfigProvider({ config, children }: { config: Omit<userSettings, 'setTheme'>, children: React.ReactNode }) {
-  // Set the active language globally for hook-free translations
-  setActiveLanguage(config.language)
-  // Set the global user date/time preferences for hook-free formatting
-  setGlobalUserConfig(config)
-
+export function UserConfigProvider({ config, children }: { config: Omit<userSettings, 'setTheme' | 'updateConfig'>, children: React.ReactNode }) {
+  const [state, setState] = useState(config)
   const [theme, setThemeState] = useState<ThemeMode>(config.theme)
   const { setTheme: setNextTheme } = useTheme()
 
+  // Set the active language globally for hook-free translations
+  setActiveLanguage(state.language)
+  // Set the global user date/time preferences for hook-free formatting
+  setGlobalUserConfig(state)
+
   // Sync state with server config when it updates
   useEffect(() => {
+    setState(config)
     setThemeState(config.theme)
-  }, [config.theme])
+  }, [config])
 
   useEffect(() => {
-    setActiveLanguage(config.language)
-    setGlobalUserConfig(config)
-  }, [config.language, config.locale, config.dateFormat, config.timeFormat])
+    setActiveLanguage(state.language)
+    setGlobalUserConfig(state)
+  }, [state.language, state.locale, state.dateFormat, state.timeFormat])
 
   useEffect(() => {
     if (theme) {
@@ -62,10 +65,20 @@ export function UserConfigProvider({ config, children }: { config: Omit<userSett
 
   const setTheme = (newTheme: ThemeMode) => {
     setThemeState(newTheme)
+    setState(prev => ({ ...prev, theme: newTheme }))
+  }
+
+  const updateConfig = (updates: Partial<Omit<userSettings, 'setTheme' | 'updateConfig'>>) => {
+    setState(prev => {
+      const next = { ...prev, ...updates }
+      setActiveLanguage(next.language)
+      setGlobalUserConfig(next)
+      return next
+    })
   }
 
   return (
-    <UserConfigContext.Provider value={{ ...config, theme, setTheme }}>
+    <UserConfigContext.Provider value={{ ...state, theme, setTheme, updateConfig }}>
       {children}
     </UserConfigContext.Provider>
   )

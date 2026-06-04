@@ -1,8 +1,6 @@
 import { AppHeader } from "@/components/app-header";
 import { getUserSession } from "@/lib/auth/auth";
 import { tran } from "@/lib/languages/i18n";
-
-import { DashboardInteractions } from "@/components/dashboard/dashboard-interactions";
 import { getUserConfig } from "@/lib/user-config";
 import SwitchBusiness from "./components/business-switch";
 import { Suspense } from "react";
@@ -47,7 +45,7 @@ export default async function Page() {
 
         {/* Visual Analytics Row */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <Suspense fallback={<Skeleton className="h-[450px] w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
+          <Suspense fallback={<Skeleton className="h-112.5 w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
             <div className="space-y-4">
               <div className="flex items-center justify-between px-2">
                 <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">Performance Trend</h2>
@@ -57,7 +55,7 @@ export default async function Page() {
             </div>
           </Suspense>
 
-          <Suspense fallback={<Skeleton className="h-[450px] w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
+          <Suspense fallback={<Skeleton className="h-112.5 w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
             <div className="space-y-4">
               <div className="flex items-center justify-between px-2">
                 <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">Liquidity Distribution</h2>

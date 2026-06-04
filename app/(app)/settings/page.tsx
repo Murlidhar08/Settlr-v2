@@ -52,7 +52,7 @@ import { useAppVersion } from "@/tanstacks/settings";
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { theme, setTheme, ...userConfig } = useUserConfig();
+  const { theme, setTheme, updateConfig, ...userConfig } = useUserConfig();
   const { data: session, isPending } = useSession();
   const { data: versionData } = useAppVersion();
 
@@ -84,9 +84,10 @@ export default function SettingsPage() {
   };
 
   const localeItems: Record<string, string> = {
-    "en-US": "English (US)",
     "en-IN": "English (India)",
+    "en-US": "English (United States)",
     "de-DE": "German (Germany)",
+    "fr-FR": "French (France)"
   };
 
   const dateFormatItems = [
@@ -177,6 +178,7 @@ export default function SettingsPage() {
                   if (!value) return
                   const v = value as Currency
                   setCurrency(v)
+                  updateConfig({ currency: v })
                   void upsertUserSettings({ currency: v })
                   toast.success(tran("settings.msg.currency_updated"))
                 }}
@@ -203,6 +205,7 @@ export default function SettingsPage() {
                   if (!value) return
                   const v = value as string
                   setLocale(v)
+                  updateConfig({ locale: v })
                   void upsertUserSettings({ locale: v })
                   toast.success(tran("settings.msg.locale_updated"))
                 }}
@@ -227,6 +230,7 @@ export default function SettingsPage() {
                 onValueChange={(value) => {
                   if (!value) return
                   setDateFormat(value)
+                  updateConfig({ dateFormat: value })
                   void upsertUserSettings({ dateFormat: value })
                   toast.success(tran("settings.msg.date_format_updated"))
                 }}
@@ -251,6 +255,7 @@ export default function SettingsPage() {
                 onValueChange={(value) => {
                   if (!value) return
                   setTimeFormat(value)
+                  updateConfig({ timeFormat: value })
                   void upsertUserSettings({ timeFormat: value })
                   toast.success(tran("settings.msg.time_format_updated"))
                 }}
@@ -275,6 +280,7 @@ export default function SettingsPage() {
                 onValueChange={(value) => {
                   if (!value) return
                   setLanguage(value)
+                  updateConfig({ language: value })
                   void upsertUserSettings({ language: value })
                   toast.success(tran("settings.msg.language_updated"))
                 }}
@@ -336,6 +342,7 @@ export default function SettingsPage() {
                     )}
                     onClick={async () => {
                       setTheme(mode.id);
+                      updateConfig({ theme: mode.id });
                       await upsertUserSettings({ theme: mode.id });
                     }}
                   >
