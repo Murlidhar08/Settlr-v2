@@ -84,11 +84,11 @@ export function PartyFilters() {
                 <div className="flex items-center gap-3">
                     <Select items={periodItems} value={currentPeriod} onValueChange={(val) => updateFilters({ period: val })}>
                         <SelectTrigger className="h-10 px-4 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-35">
-                            <SelectValue placeholder="Period" />
+                            <SelectValue placeholder={tran("common.period")} />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
                             {periodItems.map((item) => (
-                                <SelectItem key={item.value} value={item.value} className="rounded-xl">{item.label}</SelectItem>
+                                <SelectItem key={item.value} value={item.value} className="rounded-xl">{tran(item.label)}</SelectItem>
                             ))}
                         </SelectContent>
                     </Select>

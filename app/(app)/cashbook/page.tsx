@@ -2,7 +2,8 @@ import { AppHeader } from "@/components/app-header";
 import { FooterButtons } from "@/components/footer-buttons";
 import { AddTransactionModal } from "@/components/transaction/add-transaction-modal";
 import { Button } from "@/components/ui/button";
-import { tran } from "@/lib/languages/i18n";
+import { Language, t } from "@/lib/languages/i18n";
+import { getUserConfig } from "@/lib/user-config";
 import { TransactionDirection } from "@/types/transaction/TransactionDirection";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
@@ -23,6 +24,8 @@ interface CashbookPageProps {
 export default async function CashbookPage({ searchParams }: CashbookPageProps) {
   const params = await searchParams;
   const today = format(new Date(), "yyyy-MM-dd");
+  const userConfig = await getUserConfig();
+  const lang = (userConfig?.language || "en") as Language;
 
   const isSearchActive = !!params.search;
   const effectiveStartDate = params.startDate || (!isSearchActive ? today : undefined);
@@ -50,14 +53,14 @@ export default async function CashbookPage({ searchParams }: CashbookPageProps) 
 
       <FooterButtons>
         <AddTransactionModal
-          title={tran("cashbook.new_entry")}
+          title={t("cashbook.new_entry", lang)}
           direction={TransactionDirection.OUT}
           path="/cashbook"
         >
           <Button className="h-14 w-14 md:w-auto md:px-12 rounded-full md:gap-3 font-semibold uppercase bg-primary text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 p-0 md:py-2">
             <Plus className="size-6 sm:size-5" />
             <span className="hidden md:block text-center font-black tracking-[0.2em] text-sm">
-              {tran("cashbook.add_entry")}
+              {t("cashbook.add_entry", lang)}
             </span>
           </Button>
         </AddTransactionModal>

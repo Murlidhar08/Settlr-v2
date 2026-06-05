@@ -44,6 +44,7 @@ import { toast } from "sonner"
 import BackAccountHeaderClient from "./back-account-header-client"
 
 import { useAccountStats, useAccountTransactions } from "@/tanstacks/financial-account"
+import { periodItems } from "@/types/common-enums"
 import { formatAmount } from "@/utility/currency-fn"
 import { AccountDetailsSkeleton } from "./account-details-skeleton"
 
@@ -287,14 +288,14 @@ export function AccountDetailsView({ accountId, currency }: AccountDetailsViewPr
                                 <div className="h-1 w-12 bg-primary rounded-full shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
                                 <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground/70">{tran("accounts.statement_ledger")}</h2>
 
-                                <Select value={period} onValueChange={handlePeriodChange}>
+                                <Select items={periodItems} value={period} onValueChange={handlePeriodChange}>
                                     <SelectTrigger className="h-7 px-3 rounded-full bg-muted/50 text-[9px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-27.5">
                                         <SelectValue placeholder="Period" />
                                     </SelectTrigger>
                                     <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
-                                        <SelectItem value="month" className="rounded-xl">Month</SelectItem>
-                                        <SelectItem value="year" className="rounded-xl">Year</SelectItem>
-                                        <SelectItem value="all" className="rounded-xl">All</SelectItem>
+                                        {periodItems.map((item) => (
+                                            <SelectItem key={item.value} value={item.value} className="rounded-xl">{tran(item.label)}</SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                             </div>

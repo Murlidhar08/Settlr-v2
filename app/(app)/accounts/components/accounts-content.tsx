@@ -90,7 +90,7 @@ export function AccountsContent({
                                     </SelectTrigger>
                                     <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
                                         {periodItems.map((item) => (
-                                            <SelectItem key={item.value} value={item.value} className="rounded-xl">{item.label}</SelectItem>
+                                            <SelectItem key={item.value} value={item.value} className="rounded-xl">{tran(item.label)}</SelectItem>
                                         ))}
                                     </SelectContent>
                                 </Select>

@@ -7,6 +7,7 @@ import { LogOut, User as UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { tran } from "@/lib/languages/i18n";
 
 export default function ProfileAvatar() {
     const { data: session } = authClient.useSession();
@@ -63,11 +64,11 @@ export default function ProfileAvatar() {
 
                 <DropdownMenuItem onClick={handleManageProfile} className="cursor-pointer py-2">
                     <UserIcon className="h-4 w-4 mr-2" />
-                    <span>Manage Profile</span>
+                    <span>{tran("profile.manage_profile")}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive py-2">
                     <LogOut className="h-4 w-4 mr-2" />
-                    <span>Log out</span>
+                    <span>{tran("profile.logout")}</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

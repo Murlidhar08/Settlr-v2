@@ -24,6 +24,7 @@ import { addTransaction } from "@/actions/transaction.actions"
 // Library
 import { CategoryType, FinancialAccountType } from "@/lib/generated/prisma/enums"
 import { cn } from "@/lib/utils"
+import { tran } from "@/lib/languages/i18n"
 
 // Types
 import { getFinancialAccounts } from "@/actions/financial-account.actions"
@@ -379,10 +380,10 @@ export const AddTransactionModal = ({
   })
 
   // Labels
-  const moneyLabel = isOut ? "Pay From Account" : "Receive In Account"
+  const moneyLabel = isOut ? tran("cashbook.pay_from_account") : tran("cashbook.receive_in_account")
   const partnerLabel = mode === ModalMode.ACCOUNT
-    ? (isOut ? "Transfer To" : "Transfer From")
-    : (isOut ? "Payment For (Category)" : "Source (Category)")
+    ? (isOut ? tran("cashbook.transfer_to") : tran("cashbook.transfer_from"))
+    : (isOut ? tran("cashbook.payment_for_category") : tran("cashbook.source_category"))
 
   const itemVariants = {
     hidden: { opacity: 0, y: 15 },
@@ -410,9 +411,9 @@ export const AddTransactionModal = ({
                   {isOut ? <ArrowUpRight size={20} /> : <ArrowDownLeft size={20} />}
                 </div>
                 <div>
-                  <SheetTitle className="text-xl font-black tracking-tight">{title || "New Entry"}</SheetTitle>
+                  <SheetTitle className="text-xl font-black tracking-tight">{title || tran("cashbook.new_entry")}</SheetTitle>
                   <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                    {mode} ENTRY
+                    {tran(`common.${ModalMode[mode].toLowerCase()}`)} {tran("common.entry")}
                   </p>
                 </div>
               </div>
@@ -431,7 +432,7 @@ export const AddTransactionModal = ({
                     : "text-muted-foreground/40 hover:text-muted-foreground/60"
                 )}
               >
-                Money In
+                {tran("cashbook.money_in")}
               </button>
               <button
                 onClick={() => setCurrentDirection(TransactionDirection.OUT)}
@@ -442,7 +443,7 @@ export const AddTransactionModal = ({
                     : "text-muted-foreground/40 hover:text-muted-foreground/60"
                 )}
               >
-                Money Out
+                {tran("cashbook.money_out")}
               </button>
             </div>
 
@@ -462,7 +463,7 @@ export const AddTransactionModal = ({
             >
               {/* Amount Input */}
               <motion.div variants={itemVariants} className="text-center space-y-4">
-                <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50">Amount</Label>
+                <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50">{tran("common.amount")}</Label>
                 <div className={cn(
                   "relative flex items-center justify-center transition-all duration-300",
                   isOut ? "text-rose-600" : "text-emerald-600"
@@ -500,7 +501,7 @@ export const AddTransactionModal = ({
                 {/* Date Selection */}
                 <motion.div variants={itemVariants} className="space-y-2">
                   <Label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground/60">
-                    <CalendarIcon size={12} /> Date
+                    <CalendarIcon size={12} /> {tran("common.date")}
                   </Label>
                   <Popover open={dateOpen} onOpenChange={setDateOpen}>
                     <PopoverTrigger
@@ -532,7 +533,7 @@ export const AddTransactionModal = ({
                 {/* Time Selection */}
                 <motion.div variants={itemVariants} className="space-y-2">
                   <Label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground/60">
-                    <Clock size={12} /> Time
+                    <Clock size={12} /> {tran("common.time")}
                   </Label>
                   <input
                     type="time"
@@ -559,7 +560,7 @@ export const AddTransactionModal = ({
                         onValueChange={(val) => val && setMoneyAccountId(val)}
                       >
                         <SelectTrigger className="h-14 w-full rounded-2xl border-2 px-4 text-base font-bold shadow-sm hover:border-primary transition-all text-foreground bg-background">
-                          <SelectValue placeholder="Choose Account">
+                          <SelectValue placeholder={tran("common.choose_account")}>
                             {allAccounts.find(a => a.id === moneyAccountId)?.name}
                           </SelectValue>
                         </SelectTrigger>
@@ -587,7 +588,7 @@ export const AddTransactionModal = ({
                         onValueChange={(val) => val && setPartnerAccountId(val)}
                       >
                         <SelectTrigger className="h-14 w-full rounded-2xl border-2 px-4 text-base font-bold shadow-sm hover:border-primary/50 transition-all text-foreground bg-background">
-                          <SelectValue placeholder="Select Category or Account">
+                          <SelectValue placeholder={tran("common.select_category_or_account")}>
                             {allAccounts.find(a => a.id === partnerAccountId)?.name}
                           </SelectValue>
                         </SelectTrigger>
@@ -612,10 +613,10 @@ export const AddTransactionModal = ({
               {/* Note */}
               <motion.div variants={itemVariants} className="space-y-2">
                 <Label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground/60">
-                  <Paperclip size={12} /> Description
+                  <Paperclip size={12} /> {tran("common.description")}
                 </Label>
                 <Textarea
-                  placeholder="What is this for?"
+                  placeholder={tran("common.what_is_this_for")}
                   value={data.description}
                   onChange={(e) => setData({ ...data, description: e.target.value })}
                   className="min-h-25 rounded-2xl border-2 p-4 text-base font-medium transition-all focus:border-primary focus:ring-0"
@@ -632,7 +633,7 @@ export const AddTransactionModal = ({
                 onClick={() => setOpen(false)}
                 className="h-12 flex-1 rounded-2xl text-base font-bold border-2"
               >
-                Discard
+                {tran("common.discard")}
               </Button>
               <Button
                 onClick={handleAddTransaction}
@@ -647,11 +648,11 @@ export const AddTransactionModal = ({
                 {transactionMutation.isPending ? (
                   <>
                     <Loader2 className="animate-spin" size={20} />
-                    Recording...
+                    {tran("cashbook.recording")}
                   </>
                 ) : (
                   <>
-                    {isOut ? "Confirm Pay" : "Confirm Receive"}
+                    {isOut ? tran("cashbook.confirm_pay") : tran("cashbook.confirm_receive")}
                     {isOut ? <ArrowUpRight size={20} /> : <ArrowDownLeft size={20} />}
                   </>
                 )}
