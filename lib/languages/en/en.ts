@@ -10,6 +10,11 @@ export default {
         all: "All",
         today: "Today",
         select_dates: "Select Dates",
+        viewing_all: "Viewing All",
+        hide_inactive: "Hide Inactive",
+        transactions: "Transactions",
+        month: "Month",
+        year: "Year",
     },
     auth: {
         msg: {
@@ -272,6 +277,8 @@ export default {
     // Dashboard Page
     dashboard: {
         title: "Dashboard",
+        hello: "Hello",
+        subtitle: "Here's what's happening with your business today.",
         recent_transactions: "Recent Transactions",
         view_all: "View All",
         cashflow_trend: "Cashflow Trend",
@@ -294,6 +301,8 @@ export default {
         no_spending_alerts: "No specific spending alerts for this month.",
         distribution_across: "Distribution across accounts",
         of_total: "of total",
+        liquidity_distribution: "Liquidity Distribution",
+        insights: "Insights",
     },
     business: {
         label: "Business",
@@ -397,6 +406,8 @@ export default {
         new_balance_pay: "Net Balance to Pay",
         you_pay: "You Pay",
         you_receive: "You Receive",
+        search_title: "Search {type}",
+        directory_type: "Directory Type",
         msg: {
             add_failed: "Failed to add party",
             name_required: "Party name is required",
@@ -416,11 +427,14 @@ export default {
         no_transactions_filter: "No transactions found matching your filters.",
         new_entry: "New Entry",
         add_entry: "Add Entry",
+        cash: "Cash",
+        online: "Online",
     },
 
     // Transaction page
     transactions: {
         transfer: "Transfer: {from} to {to}",
+        balance_transfer: "Balance Transfer",
         cashbook: "Cashbook Entry",
         payment_received: "Payment Received",
         payment_sent: "Payment Sent",

@@ -10,6 +10,11 @@ export default {
         all: "सभी",
         today: "आज",
         select_dates: "तिथियां चुनें",
+        viewing_all: "सभी देख रहे हैं",
+        hide_inactive: "निष्क्रिय छिपाएं",
+        transactions: "लेनदेन",
+        month: "माह",
+        year: "वर्ष",
     },
     auth: {
         msg: {
@@ -272,6 +277,8 @@ export default {
     // Dashboard Page
     dashboard: {
         title: "डैशबोर्ड",
+        hello: "नमस्ते",
+        subtitle: "यहाँ बताया गया है कि आज आपके व्यवसाय में क्या हो रहा है।",
         recent_transactions: "हाल के लेनदेन",
         view_all: "सभी देखें",
         cashflow_trend: "कैशफ्लो ट्रेंड",
@@ -294,6 +301,8 @@ export default {
         no_spending_alerts: "इस महीने के लिए कोई विशिष्ट खर्च अलर्ट नहीं है।",
         distribution_across: "खातों में वितरण",
         of_total: "कुल का",
+        liquidity_distribution: "तरलता वितरण",
+        insights: "अंतर्दृष्टि",
     },
     business: {
         label: "व्यवसाय",
@@ -367,7 +376,7 @@ export default {
         employees: "कर्मचारी",
         other: "अन्य",
         add_new_customer: "नया ग्राहक जोड़ें",
-        add_new_supplier: "नया आपूर्तिकर्ता जोड़ें",
+        add_new_supplier: "नया आपूर्ूर्तिकर्ता जोड़ें",
         add_new_employee: "नया कर्मचारी जोड़ें",
         add_new_party: "नया पक्ष जोड़ें",
         directory_entry: "निर्देशिका प्रविष्टि",
@@ -397,6 +406,8 @@ export default {
         new_balance_pay: "भुगतान योग्य शुद्ध शेष",
         you_pay: "आप भुगतान करें",
         you_receive: "आपको प्राप्त",
+        search_title: "{type} खोजें",
+        directory_type: "निर्देशिका का प्रकार",
         msg: {
             add_failed: "पक्ष जोड़ने में विफल",
             name_required: "पक्ष का नाम आवश्यक है",
@@ -416,11 +427,14 @@ export default {
         no_transactions_filter: "आपके फिल्टर से मेल खाने वाला कोई लेनदेन नहीं मिला।",
         new_entry: "नई प्रविष्टि",
         add_entry: "प्रविष्टि जोड़ें",
+        cash: "नकद",
+        online: "ऑनलाइन",
     },
 
     // Transaction page
     transactions: {
         transfer: "स्थानांतरण: {from} से {to} में",
+        balance_transfer: "बैलेंस ट्रांसफर",
         cashbook: "कैशबुक प्रविष्टि",
         payment_received: "भुगतान प्राप्त हुआ",
         payment_sent: "भुगतान भेजा गया",

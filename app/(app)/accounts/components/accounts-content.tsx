@@ -84,13 +84,13 @@ export function AccountsContent({
 
                             <div className="flex items-center gap-2">
                                 <Select value={period} onValueChange={(val: any) => handlePeriodChange(val)}>
-                                    <SelectTrigger className="h-8 px-3 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-[120px]">
+                                    <SelectTrigger className="h-8 px-3 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-30">
                                         <SelectValue placeholder="Period" />
                                     </SelectTrigger>
                                     <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
-                                        <SelectItem value="month" className="rounded-xl">Month</SelectItem>
-                                        <SelectItem value="year" className="rounded-xl">Year</SelectItem>
-                                        <SelectItem value="all" className="rounded-xl">All</SelectItem>
+                                        <SelectItem value="month" className="rounded-xl">{tran("common.month")}</SelectItem>
+                                        <SelectItem value="year" className="rounded-xl">{tran("common.year")}</SelectItem>
+                                        <SelectItem value="all" className="rounded-xl">{tran("common.all")}</SelectItem>
                                     </SelectContent>
                                 </Select>
 
@@ -104,7 +104,7 @@ export function AccountsContent({
                                     )}
                                 >
                                     {showInactive ? <Eye className="size-3 mr-2" /> : <EyeOff className="size-3 mr-2" />}
-                                    {showInactive ? "Viewing All" : "Hide Inactive"}
+                                    {showInactive ? tran("common.viewing_all") : tran("common.hide_inactive")}
                                 </Button>
                             </div>
                         </div>

@@ -1,8 +1,9 @@
 "use client"
-
+ 
 import { useCashbook } from "@/tanstacks/cashbook"
 import CashSummary from "./cash-summary"
 import { CashbookList } from "./cashbook-list"
+import { tran } from "@/lib/languages/i18n"
 
 interface CashbookContentProps {
   search?: string
@@ -30,7 +31,7 @@ export function CashbookContent({
 
       <div>
         <p className="mb-4 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">
-          Transactions
+          {tran("common.transactions")}
         </p>
 
         <CashbookList transactions={transactions} isLoading={isLoading} />

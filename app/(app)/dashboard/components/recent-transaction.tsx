@@ -5,7 +5,6 @@ import { getUserConfig } from "@/lib/user-config";
 
 export default async function RecentTransaction() {
   const recentTransactions = await getRecentTransactions();
-  const { currency } = await getUserConfig();
 
   return (
     <div className="space-y-3">
@@ -23,7 +22,6 @@ export default async function RecentTransaction() {
             title={tx.description || ""}
             date={tx.date}
             amount={Number(tx.amount)}
-            currency={currency}
             fromAccountId={tx.fromAccountId}
             toAccountId={tx.toAccountId}
             fromAccountType={tx.fromAccount?.type}

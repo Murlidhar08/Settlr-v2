@@ -1,19 +1,13 @@
 "use client";
 
 import { CountUp } from "@/components/ui/count-up";
-import { Currency } from "@/lib/generated/prisma/enums";
 import { tran } from "@/lib/languages/i18n";
 import { cn } from "@/lib/utils";
 import { useDashboardSummary } from "@/tanstacks/dashboard";
 import { StatusCard } from "./status-card";
 import { MoveDownLeft, MoveUpRight, PiggyBank } from "lucide-react";
 
-interface SummaryStatsProps {
-  currency: Currency;
-  language: string;
-}
-
-export default function SummaryCard({ currency, language }: SummaryStatsProps) {
+export default function SummaryCard() {
   const { data, isPending } = useDashboardSummary();
 
   const liquidCash = data?.liquidCash || 0;

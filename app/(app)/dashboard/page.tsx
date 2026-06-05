@@ -1,7 +1,6 @@
 import { AppHeader } from "@/components/app-header";
 import { getUserSession } from "@/lib/auth/auth";
 import { tran } from "@/lib/languages/i18n";
-import { getUserConfig } from "@/lib/user-config";
 import SwitchBusiness from "./components/business-switch";
 import { Suspense } from "react";
 import SummaryCard, { SummaryCardSkeleton } from "./components/summary-card";
@@ -15,7 +14,6 @@ import { BudgetAlerts, BudgetAlertsSkeleton } from "./components/budget-alerts";
 // Components
 export default async function Page() {
   const session = await getUserSession();
-  const { language, currency } = await getUserConfig();
   const firstName = session?.user.name?.split(" ")[0] || "User";
 
   return (
@@ -27,10 +25,10 @@ export default async function Page() {
         <section className="flex flex-col md:flex-row md:items-end justify-between gap-4 pt-4">
           <div className="space-y-1">
             <h1 className="text-2xl font-black tracking-tighter sm:text-4xl text-foreground">
-              Hello, <span className="text-primary">{firstName}</span> 👋
+              {tran("dashboard.hello")}, <span className="text-primary">{firstName}</span> 👋
             </h1>
             <p className="text-xs sm:text-sm font-medium text-muted-foreground/60">
-              Here's what's happening with your business today.
+              {tran("dashboard.subtitle")}
             </p>
           </div>
           <div className="shrink-0">
@@ -40,7 +38,7 @@ export default async function Page() {
 
         {/* Global Stats Grid */}
         <Suspense fallback={<SummaryCardSkeleton />}>
-          <SummaryCard currency={currency} language={language} />
+          <SummaryCard />
         </Suspense>
 
         {/* Visual Analytics Row */}
@@ -48,7 +46,7 @@ export default async function Page() {
           <Suspense fallback={<Skeleton className="h-112.5 w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
             <div className="space-y-4">
               <div className="flex items-center justify-between px-2">
-                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">Performance Trend</h2>
+                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">{tran("dashboard.cashflow_trend")}</h2>
                 <div className="h-1 flex-1 mx-4 bg-linear-to-r from-muted to-transparent rounded-full" />
               </div>
               <CashflowChart />
@@ -58,7 +56,7 @@ export default async function Page() {
           <Suspense fallback={<Skeleton className="h-112.5 w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
             <div className="space-y-4">
               <div className="flex items-center justify-between px-2">
-                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">Liquidity Distribution</h2>
+                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">{tran("dashboard.liquidity_distribution")}</h2>
                 <div className="h-1 flex-1 mx-4 bg-linear-to-r from-muted to-transparent rounded-full" />
               </div>
               <AccountsDistribution />
@@ -84,10 +82,10 @@ export default async function Page() {
           {/* Quick Stats / Mini Cards Column */}
           <aside className="space-y-6">
             <div className="px-2">
-              <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">Insights</h2>
+              <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">{tran("dashboard.insights")}</h2>
             </div>
             <Suspense fallback={<BudgetAlertsSkeleton />}>
-              <BudgetAlerts currency={currency} />
+              <BudgetAlerts />
             </Suspense>
           </aside>
         </div>

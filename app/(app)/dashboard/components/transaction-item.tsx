@@ -9,13 +9,13 @@ import { motion } from "framer-motion";
 import { ArrowDownLeft, ArrowUpRight, Wallet2 } from "lucide-react";
 import Link from "next/link";
 import { FormattedDate } from "@/components/ui/date-time";
+import { tran } from "@/lib/languages/i18n";
 
 interface TransactionProp {
   transactionId: string;
   title: string;
   amount: number | string;
   date: Date | string | number;
-  currency: string;
   accountId?: string | null;
   accountType?: string | null;
   fromAccountId: string;
@@ -29,7 +29,6 @@ export function DashboardTransactionItem({
   title,
   amount,
   date,
-  currency,
   accountId,
   accountType,
   fromAccountId,
@@ -45,8 +44,7 @@ export function DashboardTransactionItem({
 
   const isIn = direction === TransactionDirection.IN;
   const isNeutral = direction === TransactionDirection.NEUTRAL;
-
-  const displayTitle = title || (isNeutral ? "Balance Transfer" : isIn ? "Payment Received" : "Payment Sent");
+  const displayTitle = title || (isNeutral ? tran("transactions.balance_transfer") : isIn ? tran("transactions.payment_received") : tran("transactions.payment_sent"));
 
   const renderIcon = () => {
     if (isNeutral) return <Wallet2 size={16} className="text-indigo-500" />;

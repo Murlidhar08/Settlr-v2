@@ -65,7 +65,9 @@ export function PartyFilters() {
                     className="relative w-full max-w-md"
                 >
                     <div className="flex flex-col gap-2">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-4">Search {currentTab}</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-4">
+                            {tran("parties.search_title", { type: tran("parties." + currentTab) })}
+                        </span>
                         <div className="relative group">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40 size-4 group-focus-within:text-primary transition-colors" />
                             <Input
@@ -80,13 +82,13 @@ export function PartyFilters() {
 
                 <div className="flex items-center gap-3">
                     <Select value={currentPeriod} onValueChange={(val) => updateFilters({ period: val })}>
-                        <SelectTrigger className="h-10 px-4 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-[140px]">
+                        <SelectTrigger className="h-10 px-4 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-35">
                             <SelectValue placeholder="Period" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
-                            <SelectItem value="month" className="rounded-xl">Month</SelectItem>
-                            <SelectItem value="year" className="rounded-xl">Year</SelectItem>
-                            <SelectItem value="all" className="rounded-xl">All</SelectItem>
+                            <SelectItem value="month" className="rounded-xl">{tran("common.month")}</SelectItem>
+                            <SelectItem value="year" className="rounded-xl">{tran("common.year")}</SelectItem>
+                            <SelectItem value="all" className="rounded-xl">{tran("common.all")}</SelectItem>
                         </SelectContent>
                     </Select>
 
@@ -100,7 +102,7 @@ export function PartyFilters() {
                         )}
                     >
                         {showInactive ? <Eye className="size-3 mr-2" /> : <EyeOff className="size-3 mr-2" />}
-                        {showInactive ? "Viewing All" : "Hide Inactive"}
+                        {showInactive ? tran("common.viewing_all") : tran("common.hide_inactive")}
                     </Button>
                 </div>
             </div>
@@ -111,8 +113,8 @@ export function PartyFilters() {
                 className="w-full md:w-auto"
             >
                 <div className="flex flex-col gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-1">Directory Type</span>
-                    <TabsList className="grid grid-cols-4 rounded-2xl bg-muted/40 p-1 w-full md:w-[480px] border border-border/50">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 ml-1">{tran("parties.directory_type")}</span>
+                    <TabsList className="grid grid-cols-4 rounded-2xl bg-muted/40 p-1 w-full md:w-120 border border-border/50">
                         <TabsTrigger
                             value="customers"
                             className="rounded-xl font-bold uppercase tracking-widest text-[9px] data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all h-10"
