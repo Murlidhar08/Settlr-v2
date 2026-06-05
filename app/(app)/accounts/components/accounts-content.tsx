@@ -5,20 +5,21 @@ import { AccountsSkeleton } from "@/components/account/accounts-skeleton";
 import { AddAccountModal } from "@/components/account/add-account-modal";
 import { FooterButtons } from "@/components/footer-buttons";
 import { Button } from "@/components/ui/button";
-import { Currency, FinancialAccountType } from "@/lib/generated/prisma/enums";
-import { tran } from "@/lib/languages/i18n";
-import { cn } from "@/lib/utils";
-import { useFinancialAccounts } from "@/tanstacks/financial-account";
-import { Eye, EyeOff, Plus, Wallet } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
+import { Currency, FinancialAccountType } from "@/lib/generated/prisma/enums";
+import { tran } from "@/lib/languages/i18n";
+import { cn } from "@/lib/utils";
+import { useFinancialAccounts } from "@/tanstacks/financial-account";
+import { periodItems } from "@/types/common-enums";
+import { Eye, EyeOff, Plus, Wallet } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export function AccountsContent({
     currency,
@@ -83,14 +84,14 @@ export function AccountsContent({
                             <p className="text-3xl font-black tracking-tight">{tran("accounts.total", { count: accounts.length.toString() })}</p>
 
                             <div className="flex items-center gap-2">
-                                <Select value={period} onValueChange={(val: any) => handlePeriodChange(val)}>
+                                <Select items={periodItems} value={period} onValueChange={(val: any) => handlePeriodChange(val)}>
                                     <SelectTrigger className="h-8 px-3 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-30">
-                                        <SelectValue placeholder="Period" />
+                                        <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
-                                        <SelectItem value="month" className="rounded-xl">{tran("common.month")}</SelectItem>
-                                        <SelectItem value="year" className="rounded-xl">{tran("common.year")}</SelectItem>
-                                        <SelectItem value="all" className="rounded-xl">{tran("common.all")}</SelectItem>
+                                        {periodItems.map((item) => (
+                                            <SelectItem key={item.value} value={item.value} className="rounded-xl">{item.label}</SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
 

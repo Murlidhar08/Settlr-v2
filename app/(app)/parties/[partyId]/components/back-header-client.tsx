@@ -1,6 +1,6 @@
 "use client"
 
-import { deleteParty, updateParty, togglePartyActive } from "@/actions/parties.actions"
+import { deleteParty, togglePartyActive, updateParty } from "@/actions/parties.actions"
 import { BackHeader } from "@/components/back-header"
 import {
   AlertDialog,

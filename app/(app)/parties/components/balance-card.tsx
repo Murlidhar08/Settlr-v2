@@ -1,11 +1,11 @@
 "use client";
 
-import { ArrowDown, ArrowUp, ChevronRight } from "lucide-react";
-import { formatAmount } from "@/utility/transaction";
 import { PartyType } from "@/lib/generated/prisma/enums";
-import { useParties } from "@/tanstacks/parties";
 import { tran } from "@/lib/languages/i18n";
+import { useParties } from "@/tanstacks/parties";
+import { formatAmount } from "@/utility/transaction";
 import { motion } from "framer-motion";
+import { ArrowDown, ArrowUp, ChevronRight } from "lucide-react";
 
 interface BalanceCardProps {
     partyType: PartyType;

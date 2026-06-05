@@ -288,6 +288,7 @@ export default {
         payables: "देय (Payables)",
         you_get: "आपको मिलेंगे",
         you_give: "आपको देने हैं",
+        net_worth: "शुद्ध संपत्ति",
         surplus: "दैनिक अधिशेष (Surplus)",
         deficit: "दैनिक घाटा (Deficit)",
         total_balance: "कुल शेष",

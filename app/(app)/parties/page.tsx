@@ -41,7 +41,7 @@ export default async function Parties({ searchParams }: PageProps) {
 
   return (
     <div className="w-full mx-auto pb-34">
-      <AppHeader title={tran("parties.title")} />
+      <AppHeader title={"parties.title"} />
 
       <div className="w-full mx-auto max-w-4xl mt-6 space-y-8 px-6">
         <PartiesClientProvider currentTab={currentTab}>

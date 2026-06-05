@@ -1,6 +1,8 @@
+import { AppHeader } from "@/components/app-header";
 import { FooterButtons } from "@/components/footer-buttons";
 import { AddTransactionModal } from "@/components/transaction/add-transaction-modal";
 import { Button } from "@/components/ui/button";
+import { tran } from "@/lib/languages/i18n";
 import { TransactionDirection } from "@/types/transaction/TransactionDirection";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
@@ -8,8 +10,6 @@ import { Suspense } from "react";
 import CashFilters from "./components/cash-filters";
 import { CashbookContent } from "./components/cashbook-content";
 import { CashbookSkeleton } from "./components/cashbook-skeleton";
-import { tran } from "@/lib/languages/i18n";
-import { AppHeader } from "@/components/app-header";
 
 interface CashbookPageProps {
   searchParams: Promise<{
@@ -30,7 +30,7 @@ export default async function CashbookPage({ searchParams }: CashbookPageProps) 
 
   return (
     <div className="w-full flex-1 bg-background pb-34">
-      <AppHeader title={tran("cashbook.title")} />
+      <AppHeader title={"cashbook.title"} />
 
       <div className="mx-auto w-full max-w-4xl px-6">
         <CashFilters effectiveStartDate={effectiveStartDate} effectiveEndDate={effectiveEndDate} />

@@ -1,15 +1,16 @@
 import { AppHeader } from "@/components/app-header";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getUserSession } from "@/lib/auth/auth";
 import { tran } from "@/lib/languages/i18n";
-import SwitchBusiness from "./components/business-switch";
 import { Suspense } from "react";
-import SummaryCard, { SummaryCardSkeleton } from "./components/summary-card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { CashflowChart } from "./components/cashflow-chart";
 import { AccountsDistribution } from "./components/accounts-distribution";
-import RecentTransaction from "./components/recent-transaction";
-import { TransactionListSkeletons } from "./components/transaction-item-skeleton";
 import { BudgetAlerts, BudgetAlertsSkeleton } from "./components/budget-alerts";
+import SwitchBusiness from "./components/business-switch";
+import { CashflowChart } from "./components/cashflow-chart";
+import RecentTransaction from "./components/recent-transaction";
+import SummaryCard, { SummaryCardSkeleton } from "./components/summary-card";
+import { TransactionListSkeletons } from "./components/transaction-item-skeleton";
+import WelcomeNote from "./components/welcome-note";
 
 // Components
 export default async function Page() {
@@ -23,14 +24,7 @@ export default async function Page() {
       <div className="flex-1 px-4 space-y-6 sm:space-y-8 pb-34">
         {/* Header Section */}
         <section className="flex flex-col md:flex-row md:items-end justify-between gap-4 pt-4">
-          <div className="space-y-1">
-            <h1 className="text-2xl font-black tracking-tighter sm:text-4xl text-foreground">
-              {tran("dashboard.hello")}, <span className="text-primary">{firstName}</span> 👋
-            </h1>
-            <p className="text-xs sm:text-sm font-medium text-muted-foreground/60">
-              {tran("dashboard.subtitle")}
-            </p>
-          </div>
+          <WelcomeNote firstName={firstName} />
           <div className="shrink-0">
             <SwitchBusiness />
           </div>
@@ -45,20 +39,12 @@ export default async function Page() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <Suspense fallback={<Skeleton className="h-112.5 w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
             <div className="space-y-4">
-              <div className="flex items-center justify-between px-2">
-                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">{tran("dashboard.cashflow_trend")}</h2>
-                <div className="h-1 flex-1 mx-4 bg-linear-to-r from-muted to-transparent rounded-full" />
-              </div>
               <CashflowChart />
             </div>
           </Suspense>
 
           <Suspense fallback={<Skeleton className="h-112.5 w-full rounded-[2.5rem] bg-muted/40 animate-pulse border-2 border-dashed border-muted" />}>
             <div className="space-y-4">
-              <div className="flex items-center justify-between px-2">
-                <h2 className="text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground/70">{tran("dashboard.liquidity_distribution")}</h2>
-                <div className="h-1 flex-1 mx-4 bg-linear-to-r from-muted to-transparent rounded-full" />
-              </div>
               <AccountsDistribution />
             </div>
           </Suspense>

@@ -144,11 +144,11 @@ export default function CashFilters({
                             optCategory === item ? "px-4 sm:px-6 shadow-lg shadow-primary/20" : "px-3 sm:px-4 bg-muted/40 hover:bg-muted"
                         )}
                     >
-                        {item === "All" 
-                            ? tran("common.all") 
-                            : item === MoneyType.CASH 
-                            ? tran("cashbook.cash") 
-                            : tran("cashbook.online")}
+                        {item === "All"
+                            ? tran("common.all")
+                            : item === MoneyType.CASH
+                                ? tran("cashbook.cash")
+                                : tran("cashbook.online")}
                     </Button>
                 ))}
 

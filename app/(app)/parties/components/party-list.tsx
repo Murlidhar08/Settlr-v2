@@ -1,10 +1,10 @@
 "use client";
 
 import { PartyType } from "@/lib/generated/prisma/enums";
+import { tran } from "@/lib/languages/i18n";
 import { useParties } from "@/tanstacks/parties";
 import { AnimatePresence, motion } from "framer-motion";
 import { PartyItem } from "./party-item";
-import { tran } from "@/lib/languages/i18n";
 
 interface PartyListProp {
   partyType: PartyType
@@ -65,7 +65,7 @@ const PartyList = ({ partyType, search = "", includeInactive = false, period = '
             <h3 className="text-xl font-black tracking-tight underline decoration-primary/20 decoration-4 underline-offset-4 uppercase">
               {tran("parties.no_parties_found", { type: partyType.toLowerCase() })}
             </h3>
-            <p className="text-sm font-medium text-muted-foreground/60 max-w-[250px] mx-auto leading-relaxed uppercase tracking-wider text-[10px]">
+            <p className="text-sm font-medium text-muted-foreground/60 max-w-62.5 mx-auto leading-relaxed uppercase tracking-wider text-[10px]">
               {tran("parties.no_results_search")}
             </p>
           </div>

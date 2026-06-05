@@ -2,13 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { tran } from "@/lib/languages/i18n"
-import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
-import { Eye, EyeOff, Search } from "lucide-react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
 import {
     Select,
     SelectContent,
@@ -16,7 +9,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { tran } from "@/lib/languages/i18n"
+import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
+import { Eye, EyeOff, Search } from "lucide-react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
+import { periodItems } from "@/types/common-enums"
 import { useOptimisticTab } from "./parties-client-wrapper"
 
 export function PartyFilters() {
@@ -81,14 +82,14 @@ export function PartyFilters() {
                 </motion.div>
 
                 <div className="flex items-center gap-3">
-                    <Select value={currentPeriod} onValueChange={(val) => updateFilters({ period: val })}>
+                    <Select items={periodItems} value={currentPeriod} onValueChange={(val) => updateFilters({ period: val })}>
                         <SelectTrigger className="h-10 px-4 rounded-full bg-muted text-[10px] font-black uppercase tracking-widest border-none shadow-none focus:ring-0 w-35">
                             <SelectValue placeholder="Period" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-muted/20 shadow-xl">
-                            <SelectItem value="month" className="rounded-xl">{tran("common.month")}</SelectItem>
-                            <SelectItem value="year" className="rounded-xl">{tran("common.year")}</SelectItem>
-                            <SelectItem value="all" className="rounded-xl">{tran("common.all")}</SelectItem>
+                            {periodItems.map((item) => (
+                                <SelectItem key={item.value} value={item.value} className="rounded-xl">{item.label}</SelectItem>
+                            ))}
                         </SelectContent>
                     </Select>
 

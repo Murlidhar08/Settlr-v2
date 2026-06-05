@@ -5,19 +5,6 @@ import { AddTransactionModal } from '@/components/transaction/add-transaction-mo
 import { TransactionList } from '@/components/transaction/transaction-list';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PartyType, Currency, FinancialAccountType } from '@/lib/generated/prisma/enums';
-import { calculateAccountStats } from '@/lib/transaction-logic';
-import { cn } from "@/lib/utils";
-import { usePartyDetails, usePartyTransactions } from '@/tanstacks/parties';
-import { TransactionDirection } from '@/types/transaction/TransactionDirection';
-import { getCurrencySymbol } from '@/utility/transaction';
-import { Plus, Search } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import BackHeaderClient from './back-header-client';
-import { BalanceCard } from './balance-card';
-import { PartyDetailsSkeleton } from './party-details-skeleton';
-import { QuickActions } from './quick-action';
-import { tran } from '@/lib/languages/i18n';
 import {
     Select,
     SelectContent,
@@ -25,6 +12,19 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Currency, FinancialAccountType, PartyType } from '@/lib/generated/prisma/enums';
+import { tran } from '@/lib/languages/i18n';
+import { calculateAccountStats } from '@/lib/transaction-logic';
+import { cn } from "@/lib/utils";
+import { usePartyDetails, usePartyTransactions } from '@/tanstacks/parties';
+import { TransactionDirection } from '@/types/transaction/TransactionDirection';
+import { getCurrencySymbol } from '@/utility/transaction';
+import { Plus, Search } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import BackHeaderClient from './back-header-client';
+import { BalanceCard } from './balance-card';
+import { PartyDetailsSkeleton } from './party-details-skeleton';
+import { QuickActions } from './quick-action';
 
 interface PartyDetailsContentProps {
     partyId: string;
@@ -115,7 +115,7 @@ export function PartyDetailsContent({ partyId, currency }: PartyDetailsContentPr
                                 </div>
                                 {partyType === PartyType.EMPLOYEE && (
                                     <Select value={period} onValueChange={(value: any) => setPeriod(value)}>
-                                        <SelectTrigger className="w-[140px] h-11 lg:h-12 rounded-full px-5 bg-muted/30 border-none shadow-none focus:ring-0">
+                                        <SelectTrigger className="w-35 h-11 lg:h-12 rounded-full px-5 bg-muted/30 border-none shadow-none focus:ring-0">
                                             <SelectValue placeholder="Period" />
                                         </SelectTrigger>
                                         <SelectContent className="rounded-2xl border-muted/20 shadow-xl">

@@ -288,6 +288,7 @@ export default {
         payables: "Payables",
         you_get: "You'll Get",
         you_give: "You'll Give",
+        net_worth: "Net Worth",
         surplus: "Daily Surplus",
         deficit: "Daily Deficit",
         total_balance: "Total Balance",

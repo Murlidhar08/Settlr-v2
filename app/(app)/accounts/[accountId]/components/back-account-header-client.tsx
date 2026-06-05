@@ -105,32 +105,32 @@ export default function BackAccountHeaderClient({ account }: { account: Financia
                         }
                     ] : [
                         {
-                             icon: <Pencil size={18} />,
-                             label: "Edit",
-                             onClick: () => setIsEditing(true),
-                             destructive: false
+                            icon: <Pencil size={18} />,
+                            label: "Edit",
+                            onClick: () => setIsEditing(true),
+                            destructive: false
                         },
                         {
-                             icon: <ShieldAlert size={18} />,
-                             label: account.isActive ? "Deactivate" : "Activate",
-                             onClick: async () => {
-                                 try {
-                                     await toggleFinancialAccountActive(account.id, !account.isActive)
-                                     queryClient.invalidateQueries({ queryKey: ["financial-accounts"] })
-                                     queryClient.invalidateQueries({ queryKey: ["financial-account", account.id] })
-                                     toast.success(`Account ${account.isActive ? "deactivated" : "activated"} successfully`)
-                                     router.refresh()
-                                 } catch (error: any) {
-                                     toast.error(error.message || "Failed to toggle account status")
-                                 }
-                             },
-                             destructive: account.isActive
+                            icon: <ShieldAlert size={18} />,
+                            label: account.isActive ? "Deactivate" : "Activate",
+                            onClick: async () => {
+                                try {
+                                    await toggleFinancialAccountActive(account.id, !account.isActive)
+                                    queryClient.invalidateQueries({ queryKey: ["financial-accounts"] })
+                                    queryClient.invalidateQueries({ queryKey: ["financial-account", account.id] })
+                                    toast.success(`Account ${account.isActive ? "deactivated" : "activated"} successfully`)
+                                    router.refresh()
+                                } catch (error: any) {
+                                    toast.error(error.message || "Failed to toggle account status")
+                                }
+                            },
+                            destructive: account.isActive
                         },
                         {
-                             icon: <Trash2 size={18} />,
-                             label: "Delete",
-                             onClick: () => setIsDeleting(true),
-                             destructive: true
+                            icon: <Trash2 size={18} />,
+                            label: "Delete",
+                            onClick: () => setIsDeleting(true),
+                            destructive: true
                         }
                     ])
                 ]}

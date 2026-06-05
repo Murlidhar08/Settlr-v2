@@ -72,7 +72,7 @@ export default function SwitchBusiness() {
         <PopoverTrigger className="group flex min-w-0 items-center gap-2 outline-hidden">
           <span className="text-muted-foreground hidden sm:inline">{tran("business.label")} -</span>
 
-          <span className="truncate text-xl font-semibold tracking-tight min-w-[100px]">
+          <span className="truncate text-xl font-semibold tracking-tight min-w-25">
             <LoadingText value={selectedBusiness?.name} />
           </span>
 

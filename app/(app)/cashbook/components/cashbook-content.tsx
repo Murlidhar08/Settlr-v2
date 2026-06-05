@@ -1,9 +1,9 @@
 "use client"
- 
+
+import { tran } from "@/lib/languages/i18n"
 import { useCashbook } from "@/tanstacks/cashbook"
 import CashSummary from "./cash-summary"
 import { CashbookList } from "./cashbook-list"
-import { tran } from "@/lib/languages/i18n"
 
 interface CashbookContentProps {
   search?: string

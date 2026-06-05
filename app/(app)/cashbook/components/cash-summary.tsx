@@ -1,8 +1,8 @@
 "use client"
 
+import { tran } from "@/lib/languages/i18n";
 import { formatAmount } from "@/utility/transaction";
 import { motion } from "framer-motion";
-import { tran } from "@/lib/languages/i18n";
 
 interface CashSummaryProp {
   totalIn: number

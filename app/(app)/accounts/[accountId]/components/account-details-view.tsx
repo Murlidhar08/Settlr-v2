@@ -6,7 +6,15 @@ import { useUserConfig } from "@/components/providers/user-config-provider"
 import { AddTransactionModal } from "@/components/transaction/add-transaction-modal"
 import { TransactionList } from "@/components/transaction/transaction-list"
 import { Button } from "@/components/ui/button"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import { CategoryType, Currency, FinancialAccountType, MoneyType, PartyType } from "@/lib/generated/prisma/enums"
+import { tran } from "@/lib/languages/i18n"
 import { cn } from "@/lib/utils"
 import { TransactionDirection } from "@/types/transaction/TransactionDirection"
 import { getCurrencySymbol } from "@/utility/transaction"
@@ -30,22 +38,14 @@ import {
     User2, Users,
     Wallet
 } from "lucide-react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useRef, useTransition } from "react"
 import { toast } from "sonner"
 import BackAccountHeaderClient from "./back-account-header-client"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { tran } from "@/lib/languages/i18n"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 
 import { useAccountStats, useAccountTransactions } from "@/tanstacks/financial-account"
-import { AccountDetailsSkeleton } from "./account-details-skeleton"
 import { formatAmount } from "@/utility/currency-fn"
+import { AccountDetailsSkeleton } from "./account-details-skeleton"
 
 interface AccountDetailsViewProps {
     accountId: string

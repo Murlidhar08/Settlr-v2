@@ -22,6 +22,7 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useSession } from "@/lib/auth/auth-client"
 import { Business } from "@/lib/generated/prisma/client"
+import { tran } from "@/lib/languages/i18n"
 import { cn } from "@/lib/utils"
 import { useBusinessList } from "@/tanstacks/business"
 import { AnimatePresence, motion } from "framer-motion"
@@ -29,7 +30,6 @@ import { Building2, Check, Loader2, Pencil, Plus, ShieldAlert, Trash2, X } from 
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
-import { tran } from "@/lib/languages/i18n"
 
 export default function BusinessPage() {
     const router = useRouter()

@@ -1,7 +1,6 @@
 import { getRecentTransactions } from "@/actions/transaction.actions";
-import { DashboardTransactionItem } from "./transaction-item";
 import { tran } from "@/lib/languages/i18n";
-import { getUserConfig } from "@/lib/user-config";
+import { DashboardTransactionItem } from "./transaction-item";
 
 export default async function RecentTransaction() {
   const recentTransactions = await getRecentTransactions();

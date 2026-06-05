@@ -1,10 +1,10 @@
 "use client"
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { tran } from "@/lib/languages/i18n";
 import { useBudgetInsights } from "@/tanstacks/dashboard";
 import { formatAmount } from "@/utility/transaction";
 import { AlertCircle, Info } from "lucide-react";
-import { tran } from "@/lib/languages/i18n";
 
 export function BudgetAlerts() {
     const { data: insights, isLoading } = useBudgetInsights();

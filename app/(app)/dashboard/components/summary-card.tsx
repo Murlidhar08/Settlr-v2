@@ -4,8 +4,8 @@ import { CountUp } from "@/components/ui/count-up";
 import { tran } from "@/lib/languages/i18n";
 import { cn } from "@/lib/utils";
 import { useDashboardSummary } from "@/tanstacks/dashboard";
-import { StatusCard } from "./status-card";
 import { MoveDownLeft, MoveUpRight, PiggyBank } from "lucide-react";
+import { StatusCard } from "./status-card";
 
 export default function SummaryCard() {
   const { data, isPending } = useDashboardSummary();
@@ -37,7 +37,7 @@ export default function SummaryCard() {
 
         <div className="relative z-10 mt-6 flex items-center gap-3">
           <div className="px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
-            <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest mr-2">Net Worth</span>
+            <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest mr-2">{tran("dashboard.net_worth")}</span>
             <span className="text-xs font-black text-white leading-none">
               <CountUp value={netWorth} isLoading={isPending} />
             </span>

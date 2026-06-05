@@ -1,8 +1,8 @@
 "use client";
 
 import { TransactionList } from "@/components/transaction/transaction-list";
-import { motion } from "framer-motion";
 import { tran } from "@/lib/languages/i18n";
+import { motion } from "framer-motion";
 
 interface CashbookListProps {
     transactions: any[];
@@ -18,7 +18,7 @@ export function CashbookList({ transactions, isLoading }: CashbookListProps) {
                 className="mt-3 space-y-3"
             >
                 {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="h-[72px] w-full animate-pulse rounded-2xl bg-muted/40" />
+                    <div key={i} className="h-18 w-full animate-pulse rounded-2xl bg-muted/40" />
                 ))}
             </motion.div>
         );

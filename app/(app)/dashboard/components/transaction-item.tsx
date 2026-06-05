@@ -1,6 +1,8 @@
 "use client";
 
+import { FormattedDate } from "@/components/ui/date-time";
 import { FinancialAccountType } from "@/lib/generated/prisma/enums";
+import { tran } from "@/lib/languages/i18n";
 import { getBusinessTransactionPerspective, getPartyTransactionPerspective, getTransactionPerspective } from "@/lib/transaction-logic";
 import { cn } from "@/lib/utils";
 import { TransactionDirection } from "@/types/transaction/TransactionDirection";
@@ -8,8 +10,6 @@ import { formatAmount } from "@/utility/transaction";
 import { motion } from "framer-motion";
 import { ArrowDownLeft, ArrowUpRight, Wallet2 } from "lucide-react";
 import Link from "next/link";
-import { FormattedDate } from "@/components/ui/date-time";
-import { tran } from "@/lib/languages/i18n";
 
 interface TransactionProp {
   transactionId: string;

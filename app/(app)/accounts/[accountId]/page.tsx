@@ -1,7 +1,7 @@
 import { getUserConfig } from "@/lib/user-config";
 import { Suspense } from "react";
-import { AccountDetailsView } from "./components/account-details-view";
 import { AccountDetailsSkeleton } from "./components/account-details-skeleton";
+import { AccountDetailsView } from "./components/account-details-view";
 
 export default async function AccountDetailsPage({ params }: { params: Promise<{ accountId: string }> }) {
     const { accountId } = await params;

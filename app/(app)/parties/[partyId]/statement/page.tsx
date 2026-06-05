@@ -15,12 +15,12 @@ import StatementSkeleton from "./components/statement-skeleton";
 // Lib
 import { getPartyStatement } from "@/actions/transaction.actions";
 import { FooterButtons } from "@/components/footer-buttons";
+import { FormattedDate, FormattedTime } from "@/components/ui/date-time";
 import { envClient } from "@/lib/env.client";
 import { getUserConfig } from "@/lib/user-config";
 import { cn } from "@/lib/utils";
 import { getInitials } from "@/utility/common-function";
 import { formatAmount } from "@/utility/transaction";
-import { FormattedDate, FormattedTime } from "@/components/ui/date-time";
 import * as motion from "framer-motion/client";
 
 import { getPartyTransactionPerspective } from "@/lib/transaction-logic";

@@ -2,9 +2,9 @@
 
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { tran } from "@/lib/languages/i18n";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
-import { tran } from "@/lib/languages/i18n";
 
 interface BalanceCardProps {
   totalReceived: number;
