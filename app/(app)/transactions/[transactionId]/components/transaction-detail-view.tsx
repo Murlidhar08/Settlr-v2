@@ -43,6 +43,7 @@ export function TransactionDetailView({ transaction, isIn }: TransactionDetailVi
             if (transaction.partyId) {
                 queryClient.invalidateQueries({ queryKey: ["party-detail", transaction.partyId] })
                 queryClient.invalidateQueries({ queryKey: ["party-transactions", transaction.partyId] })
+                queryClient.invalidateQueries({ queryKey: ["party-list"] })
             }
             toast.success(tran("transactions.msg.deleted"))
             router.back()

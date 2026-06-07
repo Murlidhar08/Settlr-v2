@@ -244,6 +244,7 @@ export const AddTransactionModal = ({
       }
       if (txData.fromAccountId) await queryClient.cancelQueries({ queryKey: ["financial-account", txData.fromAccountId] })
       if (txData.toAccountId) await queryClient.cancelQueries({ queryKey: ["financial-account", txData.toAccountId] })
+      if (txData.id) await queryClient.cancelQueries({ queryKey: ["transaction-detail", txData.id] })
 
       // 2. Snapshot the previous values
       const previousParties = queryClient.getQueriesData({ queryKey: ["party-transactions"] })
@@ -317,6 +318,11 @@ export const AddTransactionModal = ({
       if (vars.data.partyId) {
         queryClient.invalidateQueries({ queryKey: ["party-detail", vars.data.partyId] })
         queryClient.invalidateQueries({ queryKey: ["party-transactions", vars.data.partyId] })
+        queryClient.invalidateQueries({ queryKey: ["party-list"] })
+      }
+      const txId = vars.data.id || data?.id
+      if (txId) {
+        queryClient.invalidateQueries({ queryKey: ["transaction-detail", txId] })
       }
     }
   })
