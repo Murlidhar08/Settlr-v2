@@ -29,6 +29,7 @@ import { useRouter } from "next/navigation"
 import { ReactNode, useEffect, useState } from "react"
 import { toast } from "sonner"
 import { useQueryClient } from "@tanstack/react-query"
+import { containerVariants, itemVariants } from "@/lib/animations"
 
 interface AddAccountModalProps {
     title?: string
@@ -121,7 +122,7 @@ export const AddAccountModal = ({
         if (!data.name.trim()) {
             return toast.error("Please enter account name")
         }
-        
+
         setIsPending(true)
         try {
             if (accountData) {
@@ -148,21 +149,6 @@ export const AddAccountModal = ({
         }
     }
 
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.05
-            }
-        }
-    }
-
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 15 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
-    }
-
     return (
         <>
             {children && (
@@ -181,7 +167,7 @@ export const AddAccountModal = ({
                             <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-primary text-primary-foreground shadow-lg shadow-primary/20">
                                 {accountData ? <Edit2 size={20} /> : <Plus size={20} />}
                             </div>
-                             <div>
+                            <div>
                                 <SheetTitle className="text-xl font-black tracking-tight">
                                     {accountData ? tran("accounts.edit_account") : tran("accounts.new")}
                                 </SheetTitle>
@@ -200,7 +186,7 @@ export const AddAccountModal = ({
                             className="px-6 py-8 space-y-10"
                         >
                             {/* Account Name */}
-                             <motion.div variants={itemVariants} className="space-y-4">
+                            <motion.div variants={itemVariants} className="space-y-4">
                                 <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 ml-1">{tran("accounts.account_name")}</Label>
                                 <div className="relative group">
                                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary">
@@ -216,7 +202,7 @@ export const AddAccountModal = ({
                             </motion.div>
 
                             {/* Main Type Selection */}
-                             <motion.div variants={itemVariants} className="space-y-4">
+                            <motion.div variants={itemVariants} className="space-y-4">
                                 <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 ml-1">{tran("accounts.account_category")}</Label>
                                 <div className="grid grid-cols-2 gap-3">
                                     {[
@@ -296,7 +282,7 @@ export const AddAccountModal = ({
 
                     {/* Footer Actions */}
                     <div className="p-6 border-t bg-background/50 backdrop-blur-md pb-[env(safe-area-inset-bottom,24px)]">
-                         <div className="flex gap-4">
+                        <div className="flex gap-4">
                             <Button
                                 variant="outline"
                                 onClick={() => setOpen(false)}

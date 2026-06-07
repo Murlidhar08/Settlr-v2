@@ -460,6 +460,8 @@ export default {
             add_failed: "Failed to add party",
             name_required: "Party name is required",
             added: "Party added successfully",
+            updated: "Party updated successfully",
+            update_failed: "Failed to update party",
         }
     },
 
