@@ -51,7 +51,7 @@ export default async function CashbookPage({ searchParams }: CashbookPageProps) 
         </Suspense>
       </div>
 
-      <FooterButtons bottomSpace={true}>
+      <FooterButtons>
         <AddTransactionModal
           title={t("cashbook.new_entry", lang)}
           direction={TransactionDirection.OUT}
